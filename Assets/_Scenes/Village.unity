@@ -32031,8 +32031,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 7
-  _theRB: {fileID: 1340827044}
-  _theAnim: {fileID: 1340827046}
+  _theSR: {fileID: 1298437722}
+  _playerDirectionSprites:
+  - {fileID: 21300000, guid: 12ff971a94504e64b972d3df8684bc9d, type: 3}
+  - {fileID: 21300000, guid: 96cc55856354e7d4a82c7933a5b84e0d, type: 3}
+  - {fileID: 21300000, guid: 0a55318f321810a45b36835f9e397df5, type: 3}
 --- !u!50 &1340827044
 Rigidbody2D:
   serializedVersion: 4
