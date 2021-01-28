@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] float _moveSpeed;
 	[SerializeField] Rigidbody2D _theRB;
 
+	Animator _theAnim;
+
 	#endregion
 
 	#region Getters
@@ -20,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
 	void Start() 
 	{
-		
+		_theAnim = GetComponent<Animator>();
 	}
 	
 	void Update() 
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
 		//transform.position = new Vector3(transform.position.x + Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime, transform.position.y + Input.GetAxisRaw("Vertical") * _moveSpeed * Time.deltaTime);
 
 		_theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
+
+		_theAnim.SetFloat("Speed", _theRB.velocity.magnitude);
 	}
 	#endregion
 
