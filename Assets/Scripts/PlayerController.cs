@@ -46,10 +46,14 @@ public class PlayerController : MonoBehaviour
 				if (Input.GetAxisRaw("Horizontal") < 0)
 				{
 					_theSR.flipX = true;
+					_weaponAnim.SetFloat("dirX", -1f);
+					_weaponAnim.SetFloat("dirY", 0f);
 				}
 				else
 				{
 					_theSR.flipX = false;
+					_weaponAnim.SetFloat("dirX", 1f);
+					_weaponAnim.SetFloat("dirY", 0f);
 				}
 			}
 			else
@@ -57,10 +61,14 @@ public class PlayerController : MonoBehaviour
 				if (Input.GetAxisRaw("Vertical") < 0)
 				{
 					_theSR.sprite = _playerDirectionSprites[0];
+					_weaponAnim.SetFloat("dirX", 0f);
+					_weaponAnim.SetFloat("dirY", -1f);
 				}
 				else
 				{
 					_theSR.sprite = _playerDirectionSprites[2];
+					_weaponAnim.SetFloat("dirX", 0f);
+					_weaponAnim.SetFloat("dirY", 1f);
 				}
 			}
 		}
