@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] float _moveSpeed;
 	[SerializeField] SpriteRenderer _theSR;
 	[SerializeField] Sprite[] _playerDirectionSprites;
+	[SerializeField] Animator _weaponAnim;
 
 	Rigidbody2D _theRB;
 	Animator _theAnim;
@@ -62,6 +63,11 @@ public class PlayerController : MonoBehaviour
 					_theSR.sprite = _playerDirectionSprites[2];
 				}
 			}
+		}
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			_weaponAnim.SetTrigger("Attack");
 		}
 	}
 	#endregion
