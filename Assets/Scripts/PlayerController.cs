@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 	#region Fields & Properties
 
+	public static PlayerController Instance;
+
 	[SerializeField] float _moveSpeed;
 	[SerializeField] SpriteRenderer _theSR;
 	[SerializeField] Sprite[] _playerDirectionSprites;
@@ -22,6 +24,16 @@ public class PlayerController : MonoBehaviour
 	#endregion
 
 	#region Unity Methods
+
+	void Awake()
+	{
+		if (Instance == null)
+			Instance = this;
+		else if (Instance != this)
+			Destroy(gameObject);
+
+		DontDestroyOnLoad(gameObject);
+	}
 
 	void Start() 
 	{
