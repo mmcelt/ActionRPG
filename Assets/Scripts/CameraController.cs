@@ -6,7 +6,9 @@ public class CameraController : MonoBehaviour
 {
 	#region Fields & Properties
 
-	[SerializeField] BoxCollider2D _areaBox;
+	public static CameraController Instance;
+
+	[HideInInspector] public BoxCollider2D _areaBox;
 
 	Transform _target;
 	Camera _theCam;
@@ -21,6 +23,16 @@ public class CameraController : MonoBehaviour
 	#endregion
 
 	#region Unity Methods
+
+	void Awake()
+	{
+		if (Instance == null)
+			Instance = this;
+		else if (Instance != this)
+			Destroy(gameObject);
+
+		//DontDestroyOnLoad(gameObject);
+	}
 
 	void Start() 
 	{
