@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4710059082326340463}
   - component: {fileID: 4710059082326340448}
   - component: {fileID: 4710059082326340462}
+  - component: {fileID: 8413501163019748510}
   m_Layer: 0
   m_Name: Enemy Blob
   m_TagString: Enemy
@@ -196,3 +197,17 @@ MonoBehaviour:
   _rangeToChase: 0
   _waitAfterHitting: 0
   _damageToDeal: 10
+--- !u!114 &8413501163019748510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710059082326340459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e3078956b26bb4b8603643954ef88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathEffect: {fileID: 1597439630448732773, guid: 119570fde8844cd4bada015ff9c4c279, type: 3}
+  _currentHealth: 20
