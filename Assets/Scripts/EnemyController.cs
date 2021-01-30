@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
 	#region Fields & Properties
 
+	[SerializeField] BoxCollider2D _area;
 	[SerializeField] Rigidbody2D _theRB;
 	[SerializeField] Animator _theAnim;
 	[SerializeField] float _moveSpeed, _waitTime, _moveTime;
@@ -25,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
 	void Start() 
 	{
-		_waitCounter = _waitTime;
+		_waitCounter = Random.Range(_waitTime * 0.75f, _waitTime * 1.25f);
 	}
 	
 	void Update() 
@@ -37,7 +38,7 @@ public class EnemyController : MonoBehaviour
 
 			if (_waitCounter <= 0)
 			{
-				_moveCounter = _moveTime;
+				_moveCounter = Random.Range(_moveTime * 0.75f, _moveTime * 1.25f);
 				_theAnim.SetBool("Moving", true);
 
 				_moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
@@ -51,10 +52,14 @@ public class EnemyController : MonoBehaviour
 
 			if (_moveCounter <= 0)
 			{
-				_waitCounter = _waitTime;
+				_waitCounter = Random.Range(_waitTime * 0.75f, _moveTime * 1.25f);
 				_theAnim.SetBool("Moving", false);
 			}
 		}
+		//restrict the enemy to his home area...
+		transform.position = new Vector3(Mathf.Clamp(transform.position.x, _area.bounds.min.x + 1f, _area.bounds.max.x - 1f), 
+			Mathf.Clamp(transform.position.y, _area.bounds.min.y + 1f, _area.bounds.max.y - 1f),
+			transform.position.z);
 	}
 	#endregion
 
