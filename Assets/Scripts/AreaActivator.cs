@@ -6,6 +6,9 @@ public class AreaActivator : MonoBehaviour
 {
 	#region Fields & Properties
 
+	[SerializeField] GameObject[] _allEnemies;
+	[SerializeField] List<GameObject> _clonedEnemies;	//TODO: MAKE PRIVATE AFTER TESTING
+
 	BoxCollider2D _areaBox;
 
 	#endregion
@@ -20,6 +23,10 @@ public class AreaActivator : MonoBehaviour
 	void Start() 
 	{
 		_areaBox = GetComponent<BoxCollider2D>();
+		_clonedEnemies = new List<GameObject>();
+
+		foreach (GameObject enemy in _allEnemies)
+			enemy.SetActive(false);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -27,6 +34,16 @@ public class AreaActivator : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			CameraController.Instance._areaBox = _areaBox;
+			SpawnEnemies();
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+
+		if (other.CompareTag("Player"))
+		{
+			DespawnEnemies();
 		}
 	}
 	#endregion
@@ -38,6 +55,22 @@ public class AreaActivator : MonoBehaviour
 
 	#region Private Methods
 
+	void SpawnEnemies()
+	{
+		foreach (GameObject enemy in _allEnemies)
+		{
+			GameObject newEnemy = Instantiate(enemy, enemy.transform.position, Quaternion.identity);
+			newEnemy.SetActive(true);
+			_clonedEnemies.Add(newEnemy);
+		}
+	}
 
+	void DespawnEnemies()
+	{
+		foreach (GameObject enemy in _clonedEnemies)
+			Destroy(enemy);
+
+		_clonedEnemies.Clear();
+	}
 	#endregion
 }
