@@ -117,6 +117,8 @@ public class EnemyController : MonoBehaviour
 			{
 				_waitCounter = _waitAfterHitting;
 				_theAnim.SetBool("Moving", false);
+
+				PlayerController.Instance.KnockBack(transform.position);
 			}
 		}
 	}

@@ -16,6 +16,15 @@ public class PlayerController : MonoBehaviour
 	Rigidbody2D _theRB;
 	Animator _theAnim;
 
+	[Header("Damage Area")]
+	[SerializeField] float _knockBackTime;
+	[SerializeField] float _knockBackForce;
+	[SerializeField] GameObject _hitEffectPrefab;
+
+	bool _isKnockingBack;
+	float _knockBackCounter;
+	Vector2 _knockBackDirection;
+
 	#endregion
 
 	#region Getters
@@ -43,58 +52,79 @@ public class PlayerController : MonoBehaviour
 	
 	void Update() 
 	{
-		//transform.position = new Vector3(transform.position.x + Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime, transform.position.y + Input.GetAxisRaw("Vertical") * _moveSpeed * Time.deltaTime);
-
-		_theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
-
-		_theAnim.SetFloat("Speed", _theRB.velocity.magnitude);
-
-		if (_theRB.velocity != Vector2.zero)
+		if (!_isKnockingBack)
 		{
-			if (Input.GetAxisRaw("Horizontal") != 0)
-			{
-				_theSR.sprite = _playerDirectionSprites[1];
+			//transform.position = new Vector3(transform.position.x + Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime, transform.position.y + Input.GetAxisRaw("Vertical") * _moveSpeed * Time.deltaTime);
 
-				if (Input.GetAxisRaw("Horizontal") < 0)
+			_theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
+
+			_theAnim.SetFloat("Speed", _theRB.velocity.magnitude);
+
+			if (_theRB.velocity != Vector2.zero)
+			{
+				if (Input.GetAxisRaw("Horizontal") != 0)
 				{
-					_theSR.flipX = true;
-					_weaponAnim.SetFloat("dirX", -1f);
-					_weaponAnim.SetFloat("dirY", 0f);
+					_theSR.sprite = _playerDirectionSprites[1];
+
+					if (Input.GetAxisRaw("Horizontal") < 0)
+					{
+						_theSR.flipX = true;
+						_weaponAnim.SetFloat("dirX", -1f);
+						_weaponAnim.SetFloat("dirY", 0f);
+					}
+					else
+					{
+						_theSR.flipX = false;
+						_weaponAnim.SetFloat("dirX", 1f);
+						_weaponAnim.SetFloat("dirY", 0f);
+					}
 				}
 				else
 				{
-					_theSR.flipX = false;
-					_weaponAnim.SetFloat("dirX", 1f);
-					_weaponAnim.SetFloat("dirY", 0f);
+					if (Input.GetAxisRaw("Vertical") < 0)
+					{
+						_theSR.sprite = _playerDirectionSprites[0];
+						_weaponAnim.SetFloat("dirX", 0f);
+						_weaponAnim.SetFloat("dirY", -1f);
+					}
+					else
+					{
+						_theSR.sprite = _playerDirectionSprites[2];
+						_weaponAnim.SetFloat("dirX", 0f);
+						_weaponAnim.SetFloat("dirY", 1f);
+					}
 				}
 			}
-			else
+
+			if (Input.GetMouseButtonDown(0))
 			{
-				if (Input.GetAxisRaw("Vertical") < 0)
-				{
-					_theSR.sprite = _playerDirectionSprites[0];
-					_weaponAnim.SetFloat("dirX", 0f);
-					_weaponAnim.SetFloat("dirY", -1f);
-				}
-				else
-				{
-					_theSR.sprite = _playerDirectionSprites[2];
-					_weaponAnim.SetFloat("dirX", 0f);
-					_weaponAnim.SetFloat("dirY", 1f);
-				}
+				_weaponAnim.SetTrigger("Attack");
 			}
 		}
-
-		if (Input.GetMouseButtonDown(0))
+		else
 		{
-			_weaponAnim.SetTrigger("Attack");
+			_knockBackCounter -= Time.deltaTime;
+			_theRB.velocity = _knockBackDirection * _knockBackForce;
+
+			if (_knockBackCounter <= 0)
+			{
+				_isKnockingBack = false;
+			}
 		}
 	}
 	#endregion
 
 	#region Public Methods
 
+	public void KnockBack(Vector3 knockerPosition)
+	{
+		_knockBackCounter = _knockBackTime;
+		_isKnockingBack = true;
 
+		_knockBackDirection = transform.position - knockerPosition;
+		_knockBackDirection.Normalize();
+		Instantiate(_hitEffectPrefab, transform.position, Quaternion.identity);
+	}
 	#endregion
 
 	#region Private Methods
