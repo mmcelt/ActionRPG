@@ -21,6 +21,9 @@ public class EnemyController : MonoBehaviour
 
 	bool _isChasing;
 
+	[Header("Damage")]
+	[SerializeField] int _damageToDeal = 10;
+
 	#endregion
 
 	#region Getters
@@ -66,7 +69,7 @@ public class EnemyController : MonoBehaviour
 					_theAnim.SetBool("Moving", false);
 				}
 
-				if (_shouldChase)
+				if (_shouldChase && PlayerController.Instance.gameObject.activeInHierarchy)
 				{
 					if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) < _rangeToChase)
 					{
@@ -95,7 +98,7 @@ public class EnemyController : MonoBehaviour
 				_theRB.velocity = _moveDirection * _chaseSpeed;
 			}
 
-			if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) > _rangeToChase)
+			if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) > _rangeToChase || !PlayerController.Instance.gameObject.activeInHierarchy)
 			{
 				_isChasing = false;
 				_waitCounter= Random.Range(_waitTime * 0.75f, _moveTime * 1.25f);
@@ -119,6 +122,7 @@ public class EnemyController : MonoBehaviour
 				_theAnim.SetBool("Moving", false);
 
 				PlayerController.Instance.KnockBack(transform.position);
+				PlayerHealthController.Instance.DamagePlayer(_damageToDeal);
 			}
 		}
 	}
