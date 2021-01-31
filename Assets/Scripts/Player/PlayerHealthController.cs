@@ -36,6 +36,7 @@ public class PlayerHealthController : MonoBehaviour
 	void Start() 
 	{
 		_currentHealth = _maxHealth;
+		//_currentHealth = 20;	//TESTING
 		UIManager.Instance.UpdateHealth();
 	}
 	
@@ -64,6 +65,12 @@ public class PlayerHealthController : MonoBehaviour
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
 		}
 
+		UIManager.Instance.UpdateHealth();
+	}
+
+	public void RestoreHealth(int healthToRestore)
+	{
+		_currentHealth = Mathf.Min(_currentHealth + healthToRestore, _maxHealth);
 		UIManager.Instance.UpdateHealth();
 	}
 	#endregion
