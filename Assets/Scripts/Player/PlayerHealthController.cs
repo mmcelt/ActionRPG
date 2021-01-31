@@ -9,7 +9,7 @@ public class PlayerHealthController : MonoBehaviour
 	public static PlayerHealthController Instance;
 
 	[SerializeField] GameObject _deathEffect;
-	[SerializeField] int _currentHealth, _maxHealth;
+	public int _currentHealth, _maxHealth;
 	[SerializeField] float _invincibilityLength = 1f;
 
 	float _invincibilityCounter;
@@ -36,6 +36,7 @@ public class PlayerHealthController : MonoBehaviour
 	void Start() 
 	{
 		_currentHealth = _maxHealth;
+		UIManager.Instance.UpdateHealth();
 	}
 	
 	void Update() 
@@ -62,6 +63,8 @@ public class PlayerHealthController : MonoBehaviour
 			gameObject.SetActive(false);
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
 		}
+
+		UIManager.Instance.UpdateHealth();
 	}
 	#endregion
 

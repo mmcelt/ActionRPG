@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 298058758}
   - component: {fileID: 298058757}
   - component: {fileID: 298058756}
+  - component: {fileID: 298058760}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -542,6 +543,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &298058760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298058755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd43cac3cc3c2664eac87ac9f29d2321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthSlider: {fileID: 1739973206}
+  _healthText: {fileID: 628155412}
 --- !u!1 &298211273
 GameObject:
   m_ObjectHideFlags: 0
@@ -10623,7 +10638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HEALTH: 50/50'
+  m_text: 'HEALTH: 25/50'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 50bc9df36fb57a54fa6b21c7c7f66310, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: bc48550a9cb36f84ebdb4f9bb60af8f3, type: 2}
@@ -35335,7 +35350,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
