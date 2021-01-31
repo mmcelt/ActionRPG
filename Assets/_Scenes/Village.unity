@@ -33677,6 +33677,9 @@ MonoBehaviour:
   _hitEffectPrefab: {fileID: 2849237364295201470, guid: 2ec34f0c4085c2c43bd8c4b8fef7d9b8, type: 3}
   _dashSpeed: 15
   _dashLength: 0.25
+  _dashStaminaCost: 15
+  _totalStamina: 50
+  _staminaRefillSpeed: 5
 --- !u!50 &1340827044
 Rigidbody2D:
   serializedVersion: 4

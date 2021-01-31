@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	Rigidbody2D _theRB;
 	Animator _theAnim;
 
-	[Header("Damage Area")]
+	[Header("Damaging")]
 	[SerializeField] float _knockBackTime;
 	[SerializeField] float _knockBackForce;
 	[SerializeField] GameObject _hitEffectPrefab;
@@ -25,11 +25,18 @@ public class PlayerController : MonoBehaviour
 	float _knockBackCounter;
 	Vector2 _knockBackDirection;
 
-	[Header("Dash Area")]
+	[Header("Dashing")]
 	[SerializeField] float _dashSpeed;
 	[SerializeField] float _dashLength;
+	[SerializeField] float _dashStaminaCost;
 
 	float _dashCounter, _activeMoveSpeed;
+
+	[Header("Stamina System")]
+	[SerializeField] float _totalStamina;
+	[SerializeField] float _staminaRefillSpeed;
+
+	float _currentStamina;
 
 	#endregion
 
@@ -55,6 +62,7 @@ public class PlayerController : MonoBehaviour
 		_theRB = GetComponent<Rigidbody2D>();
 		_theAnim = GetComponent<Animator>();
 		_activeMoveSpeed = _moveSpeed;
+		_currentStamina = _totalStamina;
 	}
 	
 	void Update() 
@@ -102,18 +110,19 @@ public class PlayerController : MonoBehaviour
 					}
 				}
 			}
-
+			//Attacking...
 			if (Input.GetMouseButtonDown(0))
 			{
 				_weaponAnim.SetTrigger("Attack");
 			}
-
+			//Dashing...
 			if (_dashCounter <= 0)
 			{
-				if (Input.GetKeyDown(KeyCode.Space))
+				if (Input.GetKeyDown(KeyCode.Space) && _currentStamina >= _dashStaminaCost)
 				{
 					_activeMoveSpeed = _dashSpeed;
 					_dashCounter = _dashLength;
+					_currentStamina -= _dashStaminaCost;
 				}
 			}
 			else
@@ -125,6 +134,8 @@ public class PlayerController : MonoBehaviour
 					_activeMoveSpeed = _moveSpeed;
 				}
 			}
+			//Stamina...
+			_currentStamina = Mathf.Min(_currentStamina + _staminaRefillSpeed * Time.deltaTime, _totalStamina);
 		}
 		else
 		{
