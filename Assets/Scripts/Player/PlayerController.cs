@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 	float _dashCounter, _activeMoveSpeed;
 
 	[Header("Stamina System")]
-	[SerializeField] float _totalStamina;
+	public float _totalStamina;
 	[SerializeField] float _staminaRefillSpeed;
 
 	float _currentStamina;
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
 		_theAnim = GetComponent<Animator>();
 		_activeMoveSpeed = _moveSpeed;
 		_currentStamina = _totalStamina;
+		UIManager.Instance.UpdateStamina(Mathf.RoundToInt(_currentStamina));
 	}
 	
 	void Update() 
@@ -136,6 +137,7 @@ public class PlayerController : MonoBehaviour
 			}
 			//Stamina...
 			_currentStamina = Mathf.Min(_currentStamina + _staminaRefillSpeed * Time.deltaTime, _totalStamina);
+			UIManager.Instance.UpdateStamina(Mathf.RoundToInt(_currentStamina));
 		}
 		else
 		{
