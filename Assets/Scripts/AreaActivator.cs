@@ -43,7 +43,8 @@ public class AreaActivator : MonoBehaviour
 
 		if (other.CompareTag("Player"))
 		{
-			DespawnEnemies();
+			if(PlayerHealthController.Instance._currentHealth > 0)
+				DespawnEnemies();
 		}
 	}
 	#endregion
