@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
 	#region Fields & Properties
 
-	[SerializeField] BoxCollider2D _area;
+	public BoxCollider2D _area;
 	[SerializeField] Rigidbody2D _theRB;
 	[SerializeField] Animator _theAnim;
 	[SerializeField] float _moveSpeed, _waitTime, _moveTime;
@@ -23,6 +23,12 @@ public class EnemyController : MonoBehaviour
 
 	[Header("Damage")]
 	[SerializeField] int _damageToDeal = 10;
+	[SerializeField] float _knockBackTime, _knockBackForce, _waitAfterKnocking;
+
+	bool _isKnockingBack;
+	float _knockBackCounter, _knockWaitCounter;
+
+	Vector2 _knockBackDirection;
 
 	#endregion
 
@@ -40,72 +46,97 @@ public class EnemyController : MonoBehaviour
 	
 	void Update() 
 	{
-		if (!_isChasing)
+		if (!_isKnockingBack)
 		{
-			if (_waitCounter > 0)
+			if (!_isChasing)
 			{
-				//waiting phase...
-				_waitCounter -= Time.deltaTime;
-				_theRB.velocity = Vector2.zero;
-
-				if (_waitCounter <= 0)
+				if (_waitCounter > 0)
 				{
-					_moveCounter = Random.Range(_moveTime * 0.75f, _moveTime * 1.25f);
-					_theAnim.SetBool("Moving", true);
+					//waiting phase...
+					_waitCounter -= Time.deltaTime;
+					_theRB.velocity = Vector2.zero;
 
-					_moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-					_moveDirection.Normalize();
+					if (_waitCounter <= 0)
+					{
+						_moveCounter = Random.Range(_moveTime * 0.75f, _moveTime * 1.25f);
+						_theAnim.SetBool("Moving", true);
+
+						_moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+						_moveDirection.Normalize();
+					}
+				}
+				else
+				{
+					//movement phase...
+					_moveCounter -= Time.deltaTime;
+					_theRB.velocity = _moveDirection * _moveSpeed;
+
+					if (_moveCounter <= 0)
+					{
+						_waitCounter = Random.Range(_waitTime * 0.75f, _moveTime * 1.25f);
+						_theAnim.SetBool("Moving", false);
+					}
+
+					if (_shouldChase && PlayerController.Instance.gameObject.activeInHierarchy)
+					{
+						if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) < _rangeToChase)
+						{
+							_isChasing = true;
+						}
+					}
 				}
 			}
 			else
 			{
-				//movement phase...
-				_moveCounter -= Time.deltaTime;
-				_theRB.velocity = _moveDirection * _moveSpeed;
-
-				if (_moveCounter <= 0)
+				//chasing player...
+				if (_waitCounter > 0)
 				{
-					_waitCounter = Random.Range(_waitTime * 0.75f, _moveTime * 1.25f);
-					_theAnim.SetBool("Moving", false);
+					_waitCounter -= Time.deltaTime;
+					_theRB.velocity = Vector2.zero;
+
+					if (_waitCounter <= 0)
+					{
+						_theAnim.SetBool("Moving", true);
+					}
+				}
+				else
+				{
+					_moveDirection = PlayerController.Instance.transform.position - transform.position;
+					_moveDirection.Normalize();
+					_theRB.velocity = _moveDirection * _chaseSpeed;
 				}
 
-				if (_shouldChase && PlayerController.Instance.gameObject.activeInHierarchy)
+				if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) > _rangeToChase || !PlayerController.Instance.gameObject.activeInHierarchy)
 				{
-					if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) < _rangeToChase)
-					{
-						_isChasing = true;
-					}
+					_isChasing = false;
+					_waitCounter = Random.Range(_waitTime * 0.75f, _moveTime * 1.25f);
+					_theAnim.SetBool("Moving", false);
 				}
 			}
 		}
 		else
 		{
-			//chasing player...
-			if (_waitCounter > 0)
+			if (_knockBackCounter > 0)
 			{
-				_waitCounter -= Time.deltaTime;
-				_theRB.velocity = Vector2.zero;
+				_knockBackCounter -= Time.deltaTime;
+				_theRB.velocity = _knockBackDirection * _knockBackForce;
 
-				if (_waitCounter <= 0)
+				if (_knockBackCounter <= 0)
 				{
-					_theAnim.SetBool("Moving", true);
+					_knockWaitCounter = _waitAfterKnocking;
 				}
 			}
 			else
 			{
-				_moveDirection = PlayerController.Instance.transform.position - transform.position;
-				_moveDirection.Normalize();
-				_theRB.velocity = _moveDirection * _chaseSpeed;
-			}
+				_knockWaitCounter -= Time.deltaTime;
+				_theRB.velocity = Vector2.zero;
 
-			if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) > _rangeToChase || !PlayerController.Instance.gameObject.activeInHierarchy)
-			{
-				_isChasing = false;
-				_waitCounter= Random.Range(_waitTime * 0.75f, _moveTime * 1.25f);
-				_theAnim.SetBool("Moving", false);
+				if (_knockWaitCounter <= 0)
+				{
+					_isKnockingBack = false;
+				}
 			}
 		}
-
 		//restrict the enemy to his home area...
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, _area.bounds.min.x + 1f, _area.bounds.max.x - 1f), 
 			Mathf.Clamp(transform.position.y, _area.bounds.min.y + 1f, _area.bounds.max.y - 1f),
@@ -122,6 +153,7 @@ public class EnemyController : MonoBehaviour
 				_theAnim.SetBool("Moving", false);
 
 				PlayerController.Instance.KnockBack(transform.position);
+
 				PlayerHealthController.Instance.DamagePlayer(_damageToDeal);
 			}
 		}
@@ -130,7 +162,14 @@ public class EnemyController : MonoBehaviour
 
 	#region Public Methods
 
+	public void KnockBack(Vector3 knockerPosition)
+	{
+		_knockBackCounter = _knockBackTime;
+		_isKnockingBack = true;
 
+		_knockBackDirection = transform.position - knockerPosition;
+		_knockBackDirection.Normalize();
+	}
 	#endregion
 
 	#region Private Methods

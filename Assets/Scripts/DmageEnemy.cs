@@ -22,17 +22,13 @@ public class DmageEnemy : MonoBehaviour
 	{
 		
 	}
-	
-	void Update() 
-	{
-		
-	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Enemy"))
 		{
 			other.GetComponent<EnemyHealthController>().TakeDamage(_damageToDeal);
+
 			Instantiate(_hitEffect, transform.position, Quaternion.identity);
 		}
 	}

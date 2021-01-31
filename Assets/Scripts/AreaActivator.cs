@@ -7,7 +7,7 @@ public class AreaActivator : MonoBehaviour
 	#region Fields & Properties
 
 	[SerializeField] GameObject[] _allEnemies;
-	[SerializeField] List<GameObject> _clonedEnemies;	//TODO: MAKE PRIVATE AFTER TESTING
+	public List<GameObject> _clonedEnemies;	//TODO: MAKE PRIVATE AFTER TESTING
 
 	BoxCollider2D _areaBox;
 

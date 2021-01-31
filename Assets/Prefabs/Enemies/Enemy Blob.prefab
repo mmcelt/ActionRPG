@@ -193,10 +193,13 @@ MonoBehaviour:
   _waitTime: 2
   _moveTime: 3
   _shouldChase: 0
-  _chaseSpeed: 0
-  _rangeToChase: 0
-  _waitAfterHitting: 0
+  _chaseSpeed: 10
+  _rangeToChase: 8
+  _waitAfterHitting: 1
   _damageToDeal: 10
+  _knockBackTime: 0.2
+  _knockBackForce: 5
+  _waitAfterKnocking: 1
 --- !u!114 &8413501163019748510
 MonoBehaviour:
   m_ObjectHideFlags: 0

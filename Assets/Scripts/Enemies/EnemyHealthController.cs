@@ -9,6 +9,9 @@ public class EnemyHealthController : MonoBehaviour
 	[SerializeField] GameObject _deathEffect;
 	[SerializeField] int _currentHealth;
 
+	EnemyController _theController;
+	AreaActivator _areaActivator;
+
 	#endregion
 
 	#region Getters
@@ -20,12 +23,8 @@ public class EnemyHealthController : MonoBehaviour
 
 	void Start() 
 	{
-		
-	}
-	
-	void Update() 
-	{
-		
+		_theController = GetComponent<EnemyController>();
+		_areaActivator = GetComponent<EnemyController>()._area.GetComponent<AreaActivator>();
 	}
 	#endregion
 
@@ -38,8 +37,12 @@ public class EnemyHealthController : MonoBehaviour
 		if (_currentHealth <= 0)
 		{
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
+
+			_areaActivator._clonedEnemies.Remove(gameObject);	//remove enemy from area List
+
 			Destroy(gameObject);
 		}
+		_theController.KnockBack(PlayerController.Instance.transform.position);
 	}
 	#endregion
 
