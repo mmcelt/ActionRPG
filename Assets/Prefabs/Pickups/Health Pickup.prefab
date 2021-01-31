@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthToRestore: 10
+  _lifeTime: 10
 --- !u!1 &4619193910661474601
 GameObject:
   m_ObjectHideFlags: 0

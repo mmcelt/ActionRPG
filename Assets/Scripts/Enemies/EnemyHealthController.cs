@@ -10,7 +10,11 @@ public class EnemyHealthController : MonoBehaviour
 	[SerializeField] int _currentHealth;
 
 	EnemyController _theController;
-	AreaActivator _areaActivator;
+	AreaActivator _areaActivator; //used for removing killed enemies from the List
+
+	[Header("Health Drops")]
+	[SerializeField] GameObject _healthDropPrefab;
+	[SerializeField] float _healthDropChance;
 
 	#endregion
 
@@ -41,6 +45,11 @@ public class EnemyHealthController : MonoBehaviour
 			_areaActivator._clonedEnemies.Remove(gameObject);	//remove enemy from area List
 
 			Destroy(gameObject);
+
+			if (Random.Range(0f, 100f) < _healthDropChance && _healthDropPrefab != null)
+			{
+				Instantiate(_healthDropPrefab, transform.position, Quaternion.identity);
+			}
 		}
 		_theController.KnockBack(PlayerController.Instance.transform.position);
 	}

@@ -214,3 +214,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathEffect: {fileID: 1597439630448732773, guid: 119570fde8844cd4bada015ff9c4c279, type: 3}
   _currentHealth: 20
+  _healthDropPrefab: {fileID: 4619193909083672133, guid: 586207b98d6c7224c908131d6cf306ba, type: 3}
+  _healthDropChance: 50

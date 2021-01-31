@@ -7,6 +7,7 @@ public class HealthPickup : MonoBehaviour
 	#region Fields & Properties
 
 	[SerializeField] int _healthToRestore;
+	[SerializeField] float _lifeTime;
 
 	#endregion
 
@@ -19,7 +20,10 @@ public class HealthPickup : MonoBehaviour
 
 	void Start() 
 	{
-		
+		if (_lifeTime > 0f)
+		{
+			Destroy(gameObject, _lifeTime);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
