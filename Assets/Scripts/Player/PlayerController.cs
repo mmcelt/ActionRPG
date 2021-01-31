@@ -25,6 +25,12 @@ public class PlayerController : MonoBehaviour
 	float _knockBackCounter;
 	Vector2 _knockBackDirection;
 
+	[Header("Dash Area")]
+	[SerializeField] float _dashSpeed;
+	[SerializeField] float _dashLength;
+
+	float _dashCounter, _activeMoveSpeed;
+
 	#endregion
 
 	#region Getters
@@ -48,6 +54,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_theRB = GetComponent<Rigidbody2D>();
 		_theAnim = GetComponent<Animator>();
+		_activeMoveSpeed = _moveSpeed;
 	}
 	
 	void Update() 
@@ -56,7 +63,7 @@ public class PlayerController : MonoBehaviour
 		{
 			//transform.position = new Vector3(transform.position.x + Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime, transform.position.y + Input.GetAxisRaw("Vertical") * _moveSpeed * Time.deltaTime);
 
-			_theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _moveSpeed;
+			_theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * _activeMoveSpeed;
 
 			_theAnim.SetFloat("Speed", _theRB.velocity.magnitude);
 
@@ -99,6 +106,24 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetMouseButtonDown(0))
 			{
 				_weaponAnim.SetTrigger("Attack");
+			}
+
+			if (_dashCounter <= 0)
+			{
+				if (Input.GetKeyDown(KeyCode.Space))
+				{
+					_activeMoveSpeed = _dashSpeed;
+					_dashCounter = _dashLength;
+				}
+			}
+			else
+			{
+				_dashCounter -= Time.deltaTime;
+
+				if (_dashCounter <= 0)
+				{
+					_activeMoveSpeed = _moveSpeed;
+				}
 			}
 		}
 		else
