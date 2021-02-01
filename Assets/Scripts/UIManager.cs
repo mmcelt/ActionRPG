@@ -12,8 +12,11 @@ public class UIManager: MonoBehaviour
 
 	public Slider _healthSlider;
 	public TMP_Text _healthText;
+
 	public Slider _staminaSlider;
 	public TMP_Text _staminaText;
+
+	public TMP_Text _coinText;
 
 	#endregion
 
@@ -36,7 +39,7 @@ public class UIManager: MonoBehaviour
 
 	void Start() 
 	{
-		//UpdateHealth();
+		
 	}
 	#endregion
 
@@ -56,6 +59,11 @@ public class UIManager: MonoBehaviour
 		_staminaSlider.maxValue = PlayerController.Instance._totalStamina;
 		_staminaSlider.value = stamina;
 		_staminaText.text = $"STAMINA: {stamina}/{PlayerController.Instance._totalStamina}";
+	}
+
+	public void UpdateCoins()
+	{
+		_coinText.text = $"COINS: {GameManager.Instance._currentCoins}";
 	}
 	#endregion
 
