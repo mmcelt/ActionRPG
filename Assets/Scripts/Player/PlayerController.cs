@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	Rigidbody2D _theRB;
 	Animator _theAnim;
 
-	[Header("Damaging")]
+	[Header("Damaged")]
 	[SerializeField] float _knockBackTime;
 	[SerializeField] float _knockBackForce;
 	[SerializeField] GameObject _hitEffectPrefab;
@@ -37,6 +37,13 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] float _staminaRefillSpeed;
 
 	float _currentStamina;
+
+	[Header("Spin Attack")]
+	[SerializeField] float _spinCost;
+	[SerializeField] float _spinCooldown;
+
+	float _spinCounter;
+	bool _isSpinning;
 
 	#endregion
 
@@ -112,7 +119,7 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 			//Attacking...
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0) && !_isSpinning)
 			{
 				_weaponAnim.SetTrigger("Attack");
 			}
@@ -133,6 +140,26 @@ public class PlayerController : MonoBehaviour
 				if (_dashCounter <= 0)
 				{
 					_activeMoveSpeed = _moveSpeed;
+				}
+			}
+			//Spin Attack
+			if (_spinCounter <= 0)
+			{
+				if(Input.GetMouseButtonDown(1) && _currentStamina >= _spinCost)
+				{
+					_weaponAnim.SetTrigger("SpinAttack");
+					_currentStamina -= _spinCost;
+					_spinCounter = _spinCooldown;
+					_isSpinning = true;
+				}
+			}
+			else
+			{
+				_spinCounter -= Time.deltaTime;
+
+				if (_spinCounter <= 0)
+				{
+					_isSpinning = false;
 				}
 			}
 			//Stamina...

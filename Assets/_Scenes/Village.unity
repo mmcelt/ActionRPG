@@ -34056,6 +34056,8 @@ MonoBehaviour:
   _dashStaminaCost: 15
   _totalStamina: 50
   _staminaRefillSpeed: 5
+  _spinCost: 20
+  _spinCooldown: 1
 --- !u!50 &1340827044
 Rigidbody2D:
   serializedVersion: 4
