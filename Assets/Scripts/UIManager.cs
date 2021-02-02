@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager: MonoBehaviour
 {
@@ -10,13 +11,14 @@ public class UIManager: MonoBehaviour
 
 	public static UIManager Instance;
 
-	public Slider _healthSlider;
-	public TMP_Text _healthText;
+	[SerializeField] Slider _healthSlider;
+	[SerializeField] TMP_Text _healthText;
 
-	public Slider _staminaSlider;
-	public TMP_Text _staminaText;
+	[SerializeField] Slider _staminaSlider;
+	[SerializeField] TMP_Text _staminaText;
+	[SerializeField] TMP_Text _coinText;
 
-	public TMP_Text _coinText;
+	[SerializeField] string _mainMenuScene;
 
 	#endregion
 
@@ -40,6 +42,26 @@ public class UIManager: MonoBehaviour
 	void Start() 
 	{
 		
+	}
+	#endregion
+
+	#region UI Callbacks
+
+	public void OnResumeButtonClickded()
+	{
+
+	}
+
+	public void OnMainMenuButtonClicked()
+	{
+		SceneManager.LoadScene(_mainMenuScene);
+	}
+	public void OnQuitButtonClicked()
+	{
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#endif
+		Application.Quit();
 	}
 	#endregion
 
