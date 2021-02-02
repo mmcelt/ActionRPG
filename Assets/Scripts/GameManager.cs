@@ -33,6 +33,14 @@ public class GameManager : MonoBehaviour
 	{
 		UIManager.Instance.UpdateCoins();
 	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			PauseUnPause();
+		}
+	}
 	#endregion
 
 	#region Public Methods
@@ -41,6 +49,22 @@ public class GameManager : MonoBehaviour
 	{
 		_currentCoins += coinsToAdd;
 		UIManager.Instance.UpdateCoins();
+	}
+
+	public void PauseUnPause()
+	{
+		if (!UIManager.Instance._pauseScreen.activeInHierarchy)
+		{
+			UIManager.Instance._pauseScreen.SetActive(true);
+			Time.timeScale = 0f;
+			PlayerController.Instance._canMove = false;
+		}
+		else
+		{
+			UIManager.Instance._pauseScreen.SetActive(false);
+			Time.timeScale = 1f;
+			PlayerController.Instance._canMove = true;
+		}
 	}
 	#endregion
 

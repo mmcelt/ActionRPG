@@ -908,6 +908,7 @@ MonoBehaviour:
   _staminaSlider: {fileID: 502092748}
   _staminaText: {fileID: 193752551}
   _coinText: {fileID: 1503296771}
+  _pauseScreen: {fileID: 1681522548}
   _mainMenuScene: MainMenu
 --- !u!1 &298211273
 GameObject:
@@ -34845,7 +34846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1681522549
 RectTransform:
   m_ObjectHideFlags: 0

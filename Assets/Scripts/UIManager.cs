@@ -18,6 +18,8 @@ public class UIManager: MonoBehaviour
 	[SerializeField] TMP_Text _staminaText;
 	[SerializeField] TMP_Text _coinText;
 
+	public GameObject _pauseScreen;
+
 	[SerializeField] string _mainMenuScene;
 
 	#endregion
@@ -49,13 +51,15 @@ public class UIManager: MonoBehaviour
 
 	public void OnResumeButtonClickded()
 	{
-
+		GameManager.Instance.PauseUnPause();
 	}
 
 	public void OnMainMenuButtonClicked()
 	{
 		SceneManager.LoadScene(_mainMenuScene);
+		Time.timeScale = 1f;
 	}
+
 	public void OnQuitButtonClicked()
 	{
 #if UNITY_EDITOR

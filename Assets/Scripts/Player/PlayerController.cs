@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] SpriteRenderer _theSR;
 	[SerializeField] Sprite[] _playerDirectionSprites;
 	[SerializeField] Animator _weaponAnim;
+	public bool _canMove;
 
 	Rigidbody2D _theRB;
 	Animator _theAnim;
@@ -71,10 +72,13 @@ public class PlayerController : MonoBehaviour
 		_activeMoveSpeed = _moveSpeed;
 		_currentStamina = _totalStamina;
 		UIManager.Instance.UpdateStamina(Mathf.RoundToInt(_currentStamina));
+		_canMove = true;
 	}
 	
 	void Update() 
 	{
+		if (!_canMove) return;
+
 		if (!_isKnockingBack)
 		{
 			//transform.position = new Vector3(transform.position.x + Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime, transform.position.y + Input.GetAxisRaw("Vertical") * _moveSpeed * Time.deltaTime);
