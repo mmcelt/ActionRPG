@@ -27,11 +27,12 @@ public class CameraController : MonoBehaviour
 	void Awake()
 	{
 		if (Instance == null)
+		{
 			Instance = this;
+			//DontDestroyOnLoad(gameObject);
+		}
 		else if (Instance != this)
 			Destroy(gameObject);
-
-		//DontDestroyOnLoad(gameObject);
 	}
 
 	void Start() 

@@ -31,6 +31,7 @@ public class HealthPickup : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			PlayerHealthController.Instance.RestoreHealth(_healthToRestore);
+			AudioManager.Instance.PlaySFX(6);
 			Destroy(gameObject);
 		}
 	}

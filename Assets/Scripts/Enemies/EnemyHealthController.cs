@@ -45,21 +45,21 @@ public class EnemyHealthController : MonoBehaviour
 		if (_currentHealth <= 0)
 		{
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
-
-			_areaActivator._clonedEnemies.Remove(gameObject);	//remove enemy from area List
-
+			_areaActivator._clonedEnemies.Remove(gameObject);  //remove enemy from area List
+			AudioManager.Instance.PlaySFX(4);
 			Destroy(gameObject);
 
 			if (Random.Range(0f, 100f) < _healthDropChance && _healthDropPrefab != null)
 			{
-				Instantiate(_healthDropPrefab, transform.position, Quaternion.identity);
+				Instantiate(_healthDropPrefab, transform.position + new Vector3(1f,1f,0f), Quaternion.identity);
 			}
 
 			if (Random.Range(0f, 100f) < _coinDropChance && _coinDropPrefab != null)
 			{
-				Instantiate(_coinDropPrefab, transform.position, Quaternion.identity);
+				Instantiate(_coinDropPrefab, transform.position + new Vector3(-1f, -1f, 0f), Quaternion.identity);
 			}
 		}
+		AudioManager.Instance.PlaySFX(7);
 		_theController.KnockBack(PlayerController.Instance.transform.position);
 	}
 	#endregion

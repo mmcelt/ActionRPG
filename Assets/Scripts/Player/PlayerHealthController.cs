@@ -26,11 +26,12 @@ public class PlayerHealthController : MonoBehaviour
 	void Awake()
 	{
 		if (Instance == null)
+		{
 			Instance = this;
+			//DontDestroyOnLoad(gameObject);
+		}
 		else if (Instance != this)
 			Destroy(gameObject);
-
-		//DontDestroyOnLoad(gameObject);
 	}
 
 	void Start() 
@@ -58,11 +59,13 @@ public class PlayerHealthController : MonoBehaviour
 		//clamp _currentHealth to 0 or more
 		_currentHealth = Mathf.Max(_currentHealth - damageAmount, 0);
 		_invincibilityCounter = _invincibilityLength;
+		AudioManager.Instance.PlaySFX(7);
 
 		if (_currentHealth == 0)
 		{
 			gameObject.SetActive(false);
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
+			AudioManager.Instance.PlaySFX(4);
 		}
 
 		UIManager.Instance.UpdateHealth();

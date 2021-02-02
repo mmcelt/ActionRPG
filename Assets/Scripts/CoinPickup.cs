@@ -27,6 +27,7 @@ public class CoinPickup : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			GameManager.Instance.GetCoins(_coinValue);
+			AudioManager.Instance.PlaySFX(3);
 			Destroy(gameObject);
 		}
 	}

@@ -18,11 +18,6 @@ public class DmageEnemy : MonoBehaviour
 
 	#region Unity Methods
 
-	void Start() 
-	{
-		
-	}
-
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Enemy"))

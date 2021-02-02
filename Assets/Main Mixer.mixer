@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-6900280482542298128
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: fd0a1a2dc4fc8294aa37fc8e7fa86984
+  m_EffectName: Attenuation
+  m_MixLevel: 70e50d5b7e87d6f4e9c66d0104580deb
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-331064490384186703
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 91f134ab3fae900419505e15af34f87e
+  m_Children: []
+  m_Volume: 9a790ad23feb14446943312d04767be1
+  m_Pitch: d3ba9b76a78d78d418d041a4874620c8
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 5055956975215286717}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Main Mixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters: []
+  m_AudioMixerGroupViews:
+  - guids:
+    - 4c517e82595887b4c9514cb8e9a3b3c2
+    - bee0552088e233e489252c5b723b4302
+    - 91f134ab3fae900419505e15af34f87e
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 4c517e82595887b4c9514cb8e9a3b3c2
+  m_Children:
+  - {fileID: 2452795909307816197}
+  - {fileID: -331064490384186703}
+  m_Volume: 96d1d4af405a23f48b52cd73c7b1b183
+  m_Pitch: 8e4d6789c2f1fd04cadef04f19b6a05f
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 585e3f440cc129242ac40675380b069b
+  m_EffectName: Attenuation
+  m_MixLevel: a5adbab75aa0ae84882313b3098428c1
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: a21989b58ecb43643898214ba214006f
+  m_FloatValues:
+    a8ac455f25b45f3468e8df6ba26b5f91: -33.611675
+  m_TransitionOverrides: {}
+--- !u!243 &2452795909307816197
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Music
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: bee0552088e233e489252c5b723b4302
+  m_Children: []
+  m_Volume: a8ac455f25b45f3468e8df6ba26b5f91
+  m_Pitch: 7f6b038a53ffc5340aa5cedb9190e6fe
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -6900280482542298128}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &5055956975215286717
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 99ae549d5d2ed6e42819b32bbddefd52
+  m_EffectName: Attenuation
+  m_MixLevel: 4b76c22834f1afb4b97a3d05fed7b16f
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
