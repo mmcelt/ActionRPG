@@ -32,7 +32,9 @@ public class AudioManager : MonoBehaviour
 
 	void Start() 
 	{
-		
+		PlayerPrefs.SetInt("Screenmanager Is Fullscreen mode", 0);
+		PlayerPrefs.SetInt("Screenmanager Resolution Height", 1080);
+		PlayerPrefs.SetInt("Screenmanager Resolution Width", 1920);
 	}
 	#endregion
 
