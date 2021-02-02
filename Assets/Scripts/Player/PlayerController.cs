@@ -78,30 +78,36 @@ public class PlayerController : MonoBehaviour
 	
 	void Update() 
 	{
-		if (!_canMove) return;
-
-		if (!_isKnockingBack)
+		if (_canMove && !DialogManager.Instance._dialogPanel.activeInHierarchy)
 		{
-			//Moving...
-			Movement();
-			//Attacking...
-			Attacking();
-			//Dashing...
-			Dashing();
-			//Spin Attack...
-			SpinAttack();
-			//Stamina...
-			Stamina();
+			if (!_isKnockingBack)
+			{
+				//Moving...
+				Movement();
+				//Attacking...
+				Attacking();
+				//Dashing...
+				Dashing();
+				//Spin Attack...
+				SpinAttack();
+				//Stamina...
+				Stamina();
+			}
+			else
+			{
+				_knockBackCounter -= Time.deltaTime;
+				_theRB.velocity = _knockBackDirection * _knockBackForce;
+
+				if (_knockBackCounter <= 0)
+				{
+					_isKnockingBack = false;
+				}
+			}
 		}
 		else
 		{
-			_knockBackCounter -= Time.deltaTime;
-			_theRB.velocity = _knockBackDirection * _knockBackForce;
-
-			if (_knockBackCounter <= 0)
-			{
-				_isKnockingBack = false;
-			}
+			_theRB.velocity = Vector2.zero;
+			_theAnim.SetFloat("Speed", 0f);
 		}
 	}
 	#endregion

@@ -7,11 +7,15 @@ public class DialogManager : MonoBehaviour
 {
 	#region Fields & Properties
 
-	[SerializeField] GameObject _dialogPanel;
+	public static DialogManager Instance;
+
+	public GameObject _dialogPanel;
 	[SerializeField] TMP_Text _dialogText;
 
 	[SerializeField] string[] _dialogLines;
 	[SerializeField] int _currentLine;
+
+	bool _justStarted;
 
 	#endregion
 
@@ -21,6 +25,17 @@ public class DialogManager : MonoBehaviour
 	#endregion
 
 	#region Unity Methods
+
+	void Awake()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+			//DontDestroyOnLoad(gameObject);
+		}
+		else if (Instance != this)
+			Destroy(gameObject);
+	}
 
 	void Start() 
 	{
@@ -33,15 +48,22 @@ public class DialogManager : MonoBehaviour
 		{
 			if (Input.GetMouseButtonUp(0))
 			{
-				_currentLine++;
-
-				if (_currentLine >= _dialogLines.Length)
+				if (!_justStarted)
 				{
-					_dialogPanel.SetActive(false);
+					_currentLine++;
+
+					if (_currentLine >= _dialogLines.Length)
+					{
+						_dialogPanel.SetActive(false);
+					}
+					else
+					{
+						_dialogText.text = _dialogLines[_currentLine];
+					}
 				}
 				else
 				{
-					_dialogText.text = _dialogLines[_currentLine];
+					_justStarted = false;
 				}
 			}
 		}
@@ -50,7 +72,14 @@ public class DialogManager : MonoBehaviour
 
 	#region Public Methods
 
-
+	public void ShowDialog(string[] newLines)
+	{
+		_dialogLines = newLines;
+		_currentLine = 0;
+		_dialogText.text = _dialogLines[_currentLine];
+		_dialogPanel.SetActive(true);
+		_justStarted = true;
+	}
 	#endregion
 
 	#region Private Methods
