@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] Animator _weaponAnim;
 	public bool _canMove;
 
-	Rigidbody2D _theRB;
+	[HideInInspector] public Rigidbody2D _theRB;
+
 	Animator _theAnim;
 
 	[Header("Damaged")]
@@ -122,6 +123,11 @@ public class PlayerController : MonoBehaviour
 		_knockBackDirection = transform.position - knockerPosition;
 		_knockBackDirection.Normalize();
 		Instantiate(_hitEffectPrefab, transform.position, Quaternion.identity);
+	}
+
+	public void DoAtLevelStart()
+	{
+		_canMove = true;
 	}
 	#endregion
 
