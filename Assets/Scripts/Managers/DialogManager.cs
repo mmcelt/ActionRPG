@@ -37,11 +37,6 @@ public class DialogManager : MonoBehaviour
 			Destroy(gameObject);
 	}
 
-	void Start() 
-	{
-		
-	}
-	
 	void Update() 
 	{
 		if (_dialogPanel.activeInHierarchy)

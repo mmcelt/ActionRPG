@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class LevelStartActions : MonoBehaviour
 {	
@@ -19,6 +21,12 @@ public class LevelStartActions : MonoBehaviour
 	void Start() 
 	{
 		PlayerController.Instance.DoAtLevelStart();
+		//if (UIManager.Instance._loadingScreen.GetComponent<Image>().color.a > 0f)
+		//{
+		//	UIManager.Instance._loadingScreen.SetActive(false);
+		//}
+
+		Invoke(nameof(TurnOffLoadingScreen), 0.1f);
 	}
 	#endregion
 
@@ -29,6 +37,9 @@ public class LevelStartActions : MonoBehaviour
 
 	#region Private Methods
 
-
+	void TurnOffLoadingScreen()
+	{
+		UIManager.Instance._loadingScreen.SetActive(false);
+	}
 	#endregion
 }

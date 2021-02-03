@@ -26,7 +26,7 @@ public class SceneExit : MonoBehaviour
 			PlayerController.Instance.transform.position = _exitLocation;
 			PlayerController.Instance._theRB.velocity = Vector2.zero;
 			PlayerController.Instance._canMove = false;
-
+			UIManager.Instance._loadingScreen.SetActive(true);
 			SceneManager.LoadScene(_sceneToLoad);
 		}
 	}

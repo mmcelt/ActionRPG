@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class UIManager: MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class UIManager: MonoBehaviour
 	[SerializeField] TMP_Text _coinText;
 
 	public GameObject _pauseScreen;
+	public GameObject _loadingScreen;
+	public CanvasGroup _loadingScreenCG;
 
 	[SerializeField] string _mainMenuScene;
 

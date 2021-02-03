@@ -1459,6 +1459,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 231605643, guid: 11b438d4a536a884aaf0c2470b835985, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231605645, guid: 11b438d4a536a884aaf0c2470b835985, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179973437673199914, guid: 11b438d4a536a884aaf0c2470b835985, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8834426971402371840, guid: 11b438d4a536a884aaf0c2470b835985, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
