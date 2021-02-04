@@ -8,13 +8,13 @@ public class DungeonRoomActivator : MonoBehaviour
 
 	[SerializeField] GameObject[] _allEnemies;
 
-	public List<GameObject> _clonedEnemies;	//TODO: MAKE THIS PRIVATE WITH A GETTER
+	List<GameObject> _clonedEnemies;
 
 	#endregion
 
 	#region Getters
 
-
+	
 	#endregion
 
 	#region Unity Methods
@@ -48,7 +48,10 @@ public class DungeonRoomActivator : MonoBehaviour
 
 	#region Public Methods
 
-
+	public void RemoveEnemy(GameObject enemy)
+	{
+		_clonedEnemies.Remove(enemy);
+	}
 	#endregion
 
 	#region Private Methods

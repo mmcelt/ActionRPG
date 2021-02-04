@@ -48,9 +48,9 @@ public class EnemyHealthController : MonoBehaviour
 		{
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
 			if (_areaActivator != null)
-				_areaActivator._clonedEnemies.Remove(gameObject);  //remove enemy from area List
+				_areaActivator.RemoveEnemy(gameObject);	//remove enemy from area List
 			else
-				_dungeonAreaActivator._clonedEnemies.Remove(gameObject);
+				_dungeonAreaActivator.RemoveEnemy(gameObject);
 
 			AudioManager.Instance.PlaySFX(4);
 			Destroy(gameObject);

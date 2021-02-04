@@ -2367,9 +2367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c586475b7c0eb584d8ce3e8974a23620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allEnemies:
-  - {fileID: 0}
-  _clonedEnemies: []
+  _allEnemies: []
 --- !u!1 &1230298319
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,7 +3022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allEnemies: []
-  _clonedEnemies: []
 --- !u!1 &2073384968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,7 +3095,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allEnemies:
   - {fileID: 7782031046598311550}
-  _clonedEnemies: []
 --- !u!1 &2091254960
 GameObject:
   m_ObjectHideFlags: 0
@@ -8715,11 +8711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3868301278907081124, guid: dadb0d62a04388444840695dd693ec3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8
+      value: 4.36
       objectReference: {fileID: 0}
     - target: {fileID: 3868301278907081124, guid: dadb0d62a04388444840695dd693ec3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.10000038
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 3868301278907081124, guid: dadb0d62a04388444840695dd693ec3b, type: 3}
       propertyPath: m_LocalPosition.z
