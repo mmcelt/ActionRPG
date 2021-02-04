@@ -11,6 +11,7 @@ public class EnemyHealthController : MonoBehaviour
 
 	EnemyController _theController;
 	AreaActivator _areaActivator; //used for removing killed enemies from the List
+	DungeonRoomActivator _dungeonAreaActivator;
 
 	[Header("Health Drop")]
 	[SerializeField] GameObject _healthDropPrefab;
@@ -33,6 +34,7 @@ public class EnemyHealthController : MonoBehaviour
 	{
 		_theController = GetComponent<EnemyController>();
 		_areaActivator = GetComponent<EnemyController>()._area.GetComponent<AreaActivator>();
+		_dungeonAreaActivator = GetComponent<EnemyController>()._area.GetComponent<DungeonRoomActivator>();
 	}
 	#endregion
 
@@ -45,7 +47,11 @@ public class EnemyHealthController : MonoBehaviour
 		if (_currentHealth <= 0)
 		{
 			Instantiate(_deathEffect, transform.position, Quaternion.identity);
-			_areaActivator._clonedEnemies.Remove(gameObject);  //remove enemy from area List
+			if (_areaActivator != null)
+				_areaActivator._clonedEnemies.Remove(gameObject);  //remove enemy from area List
+			else
+				_dungeonAreaActivator._clonedEnemies.Remove(gameObject);
+
 			AudioManager.Instance.PlaySFX(4);
 			Destroy(gameObject);
 

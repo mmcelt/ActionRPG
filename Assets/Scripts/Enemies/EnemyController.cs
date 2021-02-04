@@ -153,7 +153,11 @@ public class EnemyController : MonoBehaviour
 				_theAnim.SetBool("Moving", false);
 
 				PlayerController.Instance.KnockBack(transform.position);
-
+				PlayerHealthController.Instance.DamagePlayer(_damageToDeal);
+			}
+			else
+			{
+				PlayerController.Instance.KnockBack(transform.position);
 				PlayerHealthController.Instance.DamagePlayer(_damageToDeal);
 			}
 		}
