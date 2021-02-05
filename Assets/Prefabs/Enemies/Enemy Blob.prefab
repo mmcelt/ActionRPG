@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710059081257517355}
   - component: {fileID: 4710059081257517356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4710059082326340448}
   - component: {fileID: 4710059082326340462}
   - component: {fileID: 8413501163019748510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy Blob
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -200,6 +200,10 @@ MonoBehaviour:
   _knockBackTime: 0.2
   _knockBackForce: 5
   _waitAfterKnocking: 1
+  _shouldShoot: 0
+  _bulletPrefab: {fileID: 0}
+  _timeBetweenShots: 0
+  _firePoint: {fileID: 0}
 --- !u!114 &8413501163019748510
 MonoBehaviour:
   m_ObjectHideFlags: 0

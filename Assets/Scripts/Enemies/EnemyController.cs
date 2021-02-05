@@ -30,6 +30,14 @@ public class EnemyController : MonoBehaviour
 
 	Vector2 _knockBackDirection;
 
+	[Header("Firing")]
+	[SerializeField] bool _shouldShoot;
+	[SerializeField] GameObject _bulletPrefab;
+	[SerializeField] float _timeBetweenShots;
+	[SerializeField] Transform _firePoint;
+
+	float _shotCounter;
+
 	#endregion
 
 	#region Getters
@@ -42,6 +50,7 @@ public class EnemyController : MonoBehaviour
 	void Start() 
 	{
 		_waitCounter = Random.Range(_waitTime * 0.75f, _waitTime * 1.25f);
+		_shotCounter = _timeBetweenShots;
 	}
 	
 	void Update() 
@@ -83,6 +92,18 @@ public class EnemyController : MonoBehaviour
 						{
 							_isChasing = true;
 						}
+					}
+				}
+				//Shooting
+				if (_shouldShoot)
+				{
+					_shotCounter -= Time.deltaTime;
+
+					if (_shotCounter <= 0)
+					{
+						_shotCounter = _timeBetweenShots;
+
+						Instantiate(_bulletPrefab, _firePoint.position, Quaternion.identity);
 					}
 				}
 			}
@@ -155,7 +176,7 @@ public class EnemyController : MonoBehaviour
 				PlayerController.Instance.KnockBack(transform.position);
 				PlayerHealthController.Instance.DamagePlayer(_damageToDeal);
 			}
-			else
+			else if(!_isChasing && !_shouldShoot)
 			{
 				PlayerController.Instance.KnockBack(transform.position);
 				PlayerHealthController.Instance.DamagePlayer(_damageToDeal);

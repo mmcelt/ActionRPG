@@ -21,6 +21,8 @@ public class DungeonRoomActivator : MonoBehaviour
 
 	void Start() 
 	{
+		_clonedEnemies = new List<GameObject>();
+
 		foreach (GameObject enemy in _allEnemies)
 			enemy.SetActive(false);
 

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2441652805556276024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170507177241582044}
+  m_Layer: 6
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1170507177241582044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441652805556276024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3868301278907081124}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3868301278907081123
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,8 +44,8 @@ GameObject:
   - component: {fileID: 3868301278907081128}
   - component: {fileID: 3868301278907081126}
   - component: {fileID: 13872505986684502}
-  m_Layer: 0
-  m_Name: Enemy Diamond
+  m_Layer: 6
+  m_Name: Enemy Eyemond
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,10 +59,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868301278907081123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.8, y: 10.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3868301279976412131}
+  - {fileID: 1170507177241582044}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -118,6 +149,10 @@ MonoBehaviour:
   _knockBackTime: 0.2
   _knockBackForce: 5
   _waitAfterKnocking: 1
+  _shouldShoot: 1
+  _bulletPrefab: {fileID: 8971929372863886164, guid: 28f231d3666e40345841809979cf7303, type: 3}
+  _timeBetweenShots: 2
+  _firePoint: {fileID: 1170507177241582044}
 --- !u!114 &13872505986684502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3868301279976412131}
   - component: {fileID: 3868301279976412132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
