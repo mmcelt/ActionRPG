@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DmageEnemy : MonoBehaviour
+public class DamageEnemy: MonoBehaviour
 {
 	#region Fields & Properties
 
@@ -23,8 +23,12 @@ public class DmageEnemy : MonoBehaviour
 		if (other.CompareTag("Enemy"))
 		{
 			other.GetComponent<EnemyHealthController>().TakeDamage(_damageToDeal);
-
-			Instantiate(_hitEffect, transform.position, Quaternion.identity);
+			SpawnHitEffect();
+		}
+		if (other.CompareTag("Breakable"))
+		{
+			other.GetComponent<BreakableObject>().Break();
+			SpawnHitEffect();
 		}
 	}
 	#endregion
@@ -36,6 +40,9 @@ public class DmageEnemy : MonoBehaviour
 
 	#region Private Methods
 
-
+	void SpawnHitEffect()
+	{
+		Instantiate(_hitEffect, transform.position, Quaternion.identity);
+	}
 	#endregion
 }

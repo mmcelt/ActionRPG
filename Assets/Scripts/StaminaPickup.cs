@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour
+public class StaminaPickup : MonoBehaviour
 {
 	#region Fields & Properties
 
-	[SerializeField] int _healthToRestore;
+	[SerializeField] int _staminaToRestore;
 	[SerializeField] float _lifeTime;
 	[SerializeField] float _waitToPickup = 0.5f;
 
@@ -37,7 +37,7 @@ public class HealthPickup : MonoBehaviour
 	{
 		if (other.CompareTag("Player") && _waitToPickup <= 0)
 		{
-			PlayerHealthController.Instance.RestoreHealth(_healthToRestore);
+			PlayerController.Instance.RestoreStamina(_staminaToRestore);
 			AudioManager.Instance.PlaySFX(6);
 			Destroy(gameObject);
 		}

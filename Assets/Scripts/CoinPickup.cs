@@ -7,6 +7,7 @@ public class CoinPickup : MonoBehaviour
 	#region Fields & Properties
 
 	[SerializeField] int _coinValue;
+	[SerializeField] float _waitToPickup = 0.5f;
 
 	#endregion
 
@@ -17,14 +18,15 @@ public class CoinPickup : MonoBehaviour
 
 	#region Unity Methods
 
-	void Start() 
+	void Update()
 	{
-		
+		if (_waitToPickup > 0)
+			_waitToPickup -= Time.deltaTime;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.CompareTag("Player"))
+		if (other.CompareTag("Player") && _waitToPickup <= 0)
 		{
 			GameManager.Instance.GetCoins(_coinValue);
 			AudioManager.Instance.PlaySFX(3);

@@ -129,6 +129,12 @@ public class PlayerController : MonoBehaviour
 	{
 		_canMove = true;
 	}
+
+	public void RestoreStamina(int staminaToRestore)
+	{
+		_currentStamina = Mathf.Min(_currentStamina + staminaToRestore, _totalStamina);
+		UIManager.Instance.UpdateStamina(Mathf.RoundToInt(_currentStamina));
+	}
 	#endregion
 
 	#region Private Methods

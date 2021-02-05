@@ -58,12 +58,12 @@ public class EnemyHealthController : MonoBehaviour
 
 			if (Random.Range(0f, 100f) < _healthDropChance && _healthDropPrefab != null)
 			{
-				Instantiate(_healthDropPrefab, transform.position + new Vector3(1f,1f,0f), Quaternion.identity);
+				Instantiate(_healthDropPrefab, transform.position + new Vector3(0.5f,0.5f,0f), Quaternion.identity);
 			}
 
 			if (Random.Range(0f, 100f) < _coinDropChance && _coinDropPrefab != null)
 			{
-				Instantiate(_coinDropPrefab, transform.position + new Vector3(-1f, -1f, 0f), Quaternion.identity);
+				Instantiate(_coinDropPrefab, transform.position + new Vector3(-0.5f, -0.5f, 0f), Quaternion.identity);
 			}
 		}
 		AudioManager.Instance.PlaySFX(7);
