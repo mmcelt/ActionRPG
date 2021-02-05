@@ -8,6 +8,8 @@ public class ShopItem : MonoBehaviour
 
 	[TextArea] [SerializeField] string _description;
 	[SerializeField] int _itemCost;
+	[SerializeField] bool _isHealthUpgrade, _isStaminaUpgrade, _removeAfterPurchase;
+	[SerializeField] int _amountToAdd;
 
 	bool _itemActive;
 
@@ -27,7 +29,38 @@ public class ShopItem : MonoBehaviour
 	
 	void Update() 
 	{
-		
+		if (_itemActive)
+		{
+			if (Input.GetMouseButtonDown(0))
+			{
+				if (GameManager.Instance._currentCoins >= _itemCost)
+				{
+					GameManager.Instance._currentCoins -= _itemCost;
+					UIManager.Instance.UpdateCoins();
+
+					if (_isHealthUpgrade)
+					{
+						PlayerHealthController.Instance._maxHealth += _amountToAdd;
+						PlayerHealthController.Instance._currentHealth = PlayerHealthController.Instance._maxHealth;
+						UIManager.Instance.UpdateHealth();
+					}
+					if (_isStaminaUpgrade)
+					{
+						PlayerController.Instance._totalStamina += _amountToAdd;
+					}
+					if (_removeAfterPurchase)
+					{
+						gameObject.SetActive(false);
+					}
+					DialogManager.Instance._dialogPanel.SetActive(false);
+					_itemActive = false;
+				}
+				else
+				{
+					DialogManager.Instance._dialogText.text = "<b><color=red>You are gold challenged!</color></b>";
+				}
+			}
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

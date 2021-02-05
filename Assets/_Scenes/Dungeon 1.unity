@@ -376,6 +376,10 @@ MonoBehaviour:
 
     Left-Click to Buy'
   _itemCost: 50
+  _isHealthUpgrade: 1
+  _isStaminaUpgrade: 0
+  _removeAfterPurchase: 1
+  _amountToAdd: 10
 --- !u!4 &371953554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3482442753479267569, guid: 14da92c656dfd674a8da3480e3a62a15, type: 3}
@@ -4952,6 +4956,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5100952607601442156, guid: 08a5e508626f2e24cbac060d44c96fed, type: 3}
+      propertyPath: _currentCoins
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5100952607601442157, guid: 08a5e508626f2e24cbac060d44c96fed, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5927,8 +5935,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26b727f59ba60f48a81eb8961ee60da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _description: 
-  _itemCost: 0
+  _description: 'Stamina Upgrade
+
+    Cost: 50g
+
+    Left-Click to Buy'
+  _itemCost: 50
+  _isHealthUpgrade: 0
+  _isStaminaUpgrade: 1
+  _removeAfterPurchase: 1
+  _amountToAdd: 20
 --- !u!1 &1877554336
 GameObject:
   m_ObjectHideFlags: 0
