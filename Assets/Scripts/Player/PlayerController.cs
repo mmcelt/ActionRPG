@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
 	
 	void Update() 
 	{
-		if (_canMove && !DialogManager.Instance._dialogPanel.activeInHierarchy)
+		if (_canMove && !GameManager.Instance._dialogActive)
 		{
 			if (!_isKnockingBack)
 			{

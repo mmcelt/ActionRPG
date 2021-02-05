@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance;
 
 	public int _currentCoins;
+	public bool _dialogActive;
 
 	#endregion
 

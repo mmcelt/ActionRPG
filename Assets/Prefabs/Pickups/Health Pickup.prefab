@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthToRestore: 10
   _lifeTime: 10
+  _waitToPickup: 0.5
 --- !u!1 &4619193910661474601
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,9 +133,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -465006075
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4639506938558671751, guid: 7613a4a617b1ad34892d0b6c6718d508, type: 3}
+  m_Sprite: {fileID: 8033092973025764044, guid: 7613a4a617b1ad34892d0b6c6718d508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

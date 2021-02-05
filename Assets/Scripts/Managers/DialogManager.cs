@@ -10,7 +10,7 @@ public class DialogManager : MonoBehaviour
 	public static DialogManager Instance;
 
 	public GameObject _dialogPanel;
-	[SerializeField] TMP_Text _dialogText;
+	public TMP_Text _dialogText;
 
 	[SerializeField] string[] _dialogLines;
 	[SerializeField] int _currentLine;
@@ -39,7 +39,7 @@ public class DialogManager : MonoBehaviour
 
 	void Update() 
 	{
-		if (_dialogPanel.activeInHierarchy)
+		if (GameManager.Instance._dialogActive)
 		{
 			if (Input.GetMouseButtonUp(0))
 			{
@@ -50,6 +50,7 @@ public class DialogManager : MonoBehaviour
 					if (_currentLine >= _dialogLines.Length)
 					{
 						_dialogPanel.SetActive(false);
+						GameManager.Instance._dialogActive = false;
 					}
 					else
 					{
@@ -74,6 +75,7 @@ public class DialogManager : MonoBehaviour
 		_dialogText.text = _dialogLines[_currentLine];
 		_dialogPanel.SetActive(true);
 		_justStarted = true;
+		GameManager.Instance._dialogActive = true;
 	}
 	#endregion
 
