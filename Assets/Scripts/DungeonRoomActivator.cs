@@ -15,6 +15,10 @@ public class DungeonRoomActivator : MonoBehaviour
 
 	bool _doorsLocked, _dontRespawnEnemies;
 
+	[Header("Boss Room")]
+	[SerializeField] bool _isBossRoom;
+	public Transform _bossCamPointUpr, _bossCamPointLwr;
+
 	#endregion
 
 	#region Getters
@@ -67,6 +71,11 @@ public class DungeonRoomActivator : MonoBehaviour
 					door.SetActive(true);
 
 				_doorsLocked = true;
+			}
+
+			if (_isBossRoom)
+			{
+				DungeonCameraController.Instance.ActivateBossRoom(_bossCamPointUpr.position, _bossCamPointLwr.position);
 			}
 		}
 	}

@@ -12,6 +12,11 @@ public class DungeonCameraController : MonoBehaviour
 
 	[SerializeField] float _moveSpeed;
 
+	[Header("Boss Room")]
+	public bool _inBossRoom;
+
+	Vector3 _limitUpper, _limitLower;
+
 	#endregion
 
 	#region Getters
@@ -39,13 +44,22 @@ public class DungeonCameraController : MonoBehaviour
 	
 	void LateUpdate() 
 	{
+		if (_inBossRoom)
+		{
+			_targetPoint.y = Mathf.Clamp(PlayerController.Instance.transform.position.y, _limitLower.y, _limitUpper.y);
+		}
 		transform.position = Vector3.MoveTowards(transform.position, _targetPoint, _moveSpeed * Time.deltaTime);
 	}
 	#endregion
 
 	#region Public Methods
 
-
+	public void ActivateBossRoom(Vector3 upper, Vector3 lower)
+	{
+		_inBossRoom = true;
+		_limitUpper = upper;
+		_limitLower = lower;
+	}
 	#endregion
 
 	#region Private Methods
