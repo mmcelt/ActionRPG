@@ -18,6 +18,8 @@ public class DungeonRoomActivator : MonoBehaviour
 	[Header("Boss Room")]
 	[SerializeField] bool _isBossRoom;
 	public Transform _bossCamPointUpr, _bossCamPointLwr;
+	[SerializeField] GameObject _theBoss;
+	bool _dontReactivateBoss;
 
 	#endregion
 
@@ -76,6 +78,16 @@ public class DungeonRoomActivator : MonoBehaviour
 			if (_isBossRoom)
 			{
 				DungeonCameraController.Instance.ActivateBossRoom(_bossCamPointUpr.position, _bossCamPointLwr.position);
+
+				if (!_dontReactivateBoss)
+				{
+					_theBoss.SetActive(true);
+					_dontReactivateBoss = true;
+				}
+			}
+			else
+			{
+				DungeonCameraController.Instance._inBossRoom = false;
 			}
 		}
 	}
