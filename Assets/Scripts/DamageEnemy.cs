@@ -30,6 +30,11 @@ public class DamageEnemy: MonoBehaviour
 			other.GetComponent<BreakableObject>().Break();
 			SpawnHitEffect();
 		}
+		if (other.CompareTag("Boss"))
+		{
+			other.GetComponentInParent<BossController>().TakeDamage(_damageToDeal);
+			SpawnHitEffect();
+		}
 	}
 	#endregion
 
