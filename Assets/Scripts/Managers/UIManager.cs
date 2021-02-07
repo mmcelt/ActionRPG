@@ -25,6 +25,10 @@ public class UIManager: MonoBehaviour
 
 	[SerializeField] string _mainMenuScene;
 
+	public GameObject _bossHealthbar;
+	[SerializeField] Slider _bossHealthSlider;
+	[SerializeField] TMP_Text _bossNameText;
+
 	#endregion
 
 	#region Getters
@@ -94,6 +98,12 @@ public class UIManager: MonoBehaviour
 	public void UpdateCoins()
 	{
 		_coinText.text = $"COINS: {GameManager.Instance._currentCoins}";
+	}
+	public void UpdateBossHealthbar(int maxHealth, int currentHealth, string name)
+	{
+		_bossHealthSlider.maxValue = maxHealth;
+		_bossHealthSlider.value = currentHealth;
+		_bossNameText.text = name;
 	}
 	#endregion
 

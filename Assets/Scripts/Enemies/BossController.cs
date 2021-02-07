@@ -7,12 +7,13 @@ public class BossController : MonoBehaviour
 	#region Fields & Properties
 
 	public string _bossName;
-	[SerializeField] int _bossHealth;
+	[SerializeField] int _bossMaxHealth, _bossHealth;
 	[SerializeField] GameObject _deathEffect;
 	[SerializeField] GameObject _theBossSprite, _door;
 	[SerializeField] Transform[] _spawnPoints;
 	[SerializeField] float _moveSpeed, _timeActive, _timeBetweenSpawns, _initalSpawnDelay;
 
+	
 	Vector3 _moveTarget;
 	float _activeCounter, _spawnCounter;
 
@@ -36,8 +37,11 @@ public class BossController : MonoBehaviour
 
 	void Start()
 	{
+		_bossHealth = _bossMaxHealth;
 		_door.SetActive(true);
 		_spawnCounter = _initalSpawnDelay;
+		UIManager.Instance._bossHealthbar.SetActive(true);
+		UIManager.Instance.UpdateBossHealthbar(_bossMaxHealth, _bossHealth, _bossName);
 	}
 
 	void Update()
@@ -119,12 +123,15 @@ public class BossController : MonoBehaviour
 
 		_bossHealth = Mathf.Max(_bossHealth - damageToTake, 0);
 
+		UIManager.Instance.UpdateBossHealthbar(_bossMaxHealth, _bossHealth, _bossName);
+
 		if (_bossHealth == 0)
 		{
 			Instantiate(_deathEffect, _theBossSprite.transform.position, Quaternion.identity);
 
 			_theBossSprite.SetActive(false);
 			_door.SetActive(false);
+			UIManager.Instance._bossHealthbar.SetActive(false);
 		}
 	}
 	#endregion
