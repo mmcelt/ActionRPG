@@ -48,10 +48,13 @@ public class CameraController : MonoBehaviour
 	{
 		transform.position = new Vector3(_target.transform.position.x, _target.transform.position.y, transform.position.z);
 
-		transform.position = new Vector3(
-			Mathf.Clamp(transform.position.x, _areaBox.bounds.min.x + _halfWidth, _areaBox.bounds.max.x - _halfWidth), 
-			Mathf.Clamp(transform.position.y, _areaBox.bounds.min.y + _halfHeight, _areaBox.bounds.max.y - _halfHeight), 
-			transform.position.z);
+		if(_areaBox != null)
+		{
+			transform.position = new Vector3(
+	Mathf.Clamp(transform.position.x, _areaBox.bounds.min.x + _halfWidth, _areaBox.bounds.max.x - _halfWidth),
+	Mathf.Clamp(transform.position.y, _areaBox.bounds.min.y + _halfHeight, _areaBox.bounds.max.y - _halfHeight),
+	transform.position.z);
+		}
 	}
 	#endregion
 
