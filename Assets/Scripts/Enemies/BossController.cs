@@ -12,7 +12,7 @@ public class BossController : MonoBehaviour
 	[SerializeField] GameObject _theBossSprite, _door;
 	[SerializeField] Transform[] _spawnPoints;
 	[SerializeField] float _moveSpeed, _timeActive, _timeBetweenSpawns, _initalSpawnDelay;
-
+	[SerializeField] AudioSource _levelBGM, _bossBattleBGMS;
 	
 	Vector3 _moveTarget;
 	float _activeCounter, _spawnCounter;
@@ -42,6 +42,8 @@ public class BossController : MonoBehaviour
 		_spawnCounter = _initalSpawnDelay;
 		UIManager.Instance._bossHealthbar.SetActive(true);
 		UIManager.Instance.UpdateBossHealthbar(_bossMaxHealth, _bossHealth, _bossName);
+		_levelBGM.Stop();
+		_bossBattleBGMS.Play();
 	}
 
 	void Update()
@@ -132,6 +134,8 @@ public class BossController : MonoBehaviour
 			_theBossSprite.SetActive(false);
 			_door.SetActive(false);
 			UIManager.Instance._bossHealthbar.SetActive(false);
+			_bossBattleBGMS.Stop();
+			_levelBGM.Play();
 		}
 	}
 	#endregion
