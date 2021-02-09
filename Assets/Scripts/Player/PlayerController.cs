@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] DamageEnemy _swordDamage;
 	[SerializeField] int _currentSword;
 
+	Vector3 _respawnPos;
+
 	#endregion
 
 	#region Getters
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
+			//DontDestroyOnLoad(gameObject);
 		}
 		else if (Instance != this)
 			Destroy(gameObject);
@@ -134,6 +136,7 @@ public class PlayerController : MonoBehaviour
 	public void DoAtLevelStart()
 	{
 		_canMove = true;
+		_respawnPos = transform.position;
 	}
 
 	public void RestoreStamina(int staminaToRestore)
@@ -147,6 +150,16 @@ public class PlayerController : MonoBehaviour
 		_swordDamage._damageToDeal = newDamage;
 		_currentSword = newSwordRef;
 		_swordSR.sprite = _allSwords[_currentSword];
+	}
+
+	public void ResetOnRespawn()
+	{
+		transform.position = _respawnPos;
+		_canMove = false;
+		gameObject.SetActive(true);
+		_currentStamina = _totalStamina;
+		_knockBackCounter = 0f;
+		PlayerHealthController.Instance._currentHealth = PlayerHealthController.Instance._maxHealth;
 	}
 	#endregion
 

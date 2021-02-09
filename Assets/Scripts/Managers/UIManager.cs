@@ -22,6 +22,7 @@ public class UIManager: MonoBehaviour
 	public GameObject _pauseScreen;
 	public GameObject _loadingScreen;
 	public CanvasGroup _loadingScreenCG;
+	public GameObject _deathScreen;
 
 	[SerializeField] string _mainMenuScene;
 
@@ -43,7 +44,7 @@ public class UIManager: MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
+			//DontDestroyOnLoad(gameObject);
 		}
 		else if (Instance != this)
 			Destroy(gameObject);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 
 	public int _currentCoins;
 	public bool _dialogActive;
+	public float _waitForDeathScreen = 1f, _waitForRespawn = 2;
 
 	#endregion
 
@@ -68,10 +70,24 @@ public class GameManager : MonoBehaviour
 			PlayerController.Instance._canMove = true;
 		}
 	}
+
+	public void Respawn()
+	{
+		StartCoroutine(RespawnRoutine());
+	}
 	#endregion
 
 	#region Private Methods
 
-
+	IEnumerator RespawnRoutine()
+	{
+		yield return new WaitForSeconds(_waitForDeathScreen);
+		UIManager.Instance._deathScreen.SetActive(true);
+		yield return new WaitForSeconds(_waitForRespawn);
+		//UIManager.Instance._deathScreen.SetActive(false);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		UIManager.Instance._loadingScreen.SetActive(true);
+		PlayerController.Instance.ResetOnRespawn();
+	}
 	#endregion
 }
