@@ -68,13 +68,13 @@ public class DialogManager : MonoBehaviour
 
 	#region Public Methods
 
-	public void ShowDialog(string[] newLines)
+	public void ShowDialog(string[] newLines, bool shouldWaitForNextClick)
 	{
 		_dialogLines = newLines;
 		_currentLine = 0;
 		_dialogText.text = _dialogLines[_currentLine];
 		_dialogPanel.SetActive(true);
-		_justStarted = true;
+		_justStarted = shouldWaitForNextClick;
 		GameManager.Instance._dialogActive = true;
 	}
 	#endregion

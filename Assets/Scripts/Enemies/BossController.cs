@@ -13,7 +13,8 @@ public class BossController : MonoBehaviour
 	[SerializeField] Transform[] _spawnPoints;
 	[SerializeField] float _moveSpeed, _timeActive, _timeBetweenSpawns, _initalSpawnDelay;
 	[SerializeField] AudioSource _levelBGM, _bossBattleBGMS;
-	
+	[SerializeField] GameObject _victoryObject;
+
 	Vector3 _moveTarget;
 	float _activeCounter, _spawnCounter;
 
@@ -132,10 +133,12 @@ public class BossController : MonoBehaviour
 			Instantiate(_deathEffect, _theBossSprite.transform.position, Quaternion.identity);
 
 			_theBossSprite.SetActive(false);
-			_door.SetActive(false);
+			//_door.SetActive(false);
 			UIManager.Instance._bossHealthbar.SetActive(false);
 			_bossBattleBGMS.Stop();
 			_levelBGM.Play();
+
+			_victoryObject.SetActive(true);
 		}
 	}
 	#endregion

@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
 	float _spinCounter;
 	bool _isSpinning;
 
+	[Header("Sword Upgrades")]
+	[SerializeField] SpriteRenderer _swordSR;
+	[SerializeField] Sprite[] _allSwords;
+	[SerializeField] DamageEnemy _swordDamage;
+	[SerializeField] int _currentSword;
+
 	#endregion
 
 	#region Getters
@@ -134,6 +140,13 @@ public class PlayerController : MonoBehaviour
 	{
 		_currentStamina = Mathf.Min(_currentStamina + staminaToRestore, _totalStamina);
 		UIManager.Instance.UpdateStamina(Mathf.RoundToInt(_currentStamina));
+	}
+
+	public void UpgradeSword(int newDamage, int newSwordRef)
+	{
+		_swordDamage._damageToDeal = newDamage;
+		_currentSword = newSwordRef;
+		_swordSR.sprite = _allSwords[_currentSword];
 	}
 	#endregion
 

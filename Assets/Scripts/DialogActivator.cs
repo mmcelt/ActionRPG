@@ -28,7 +28,7 @@ public class DialogActivator : MonoBehaviour
 	{
 		if (_canActivate && Input.GetMouseButtonDown(0) && !DialogManager.Instance._dialogPanel.activeInHierarchy)
 		{
-			DialogManager.Instance.ShowDialog(_dialogLines);
+			DialogManager.Instance.ShowDialog(_dialogLines, true);
 		}
 	}
 

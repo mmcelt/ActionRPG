@@ -7,7 +7,7 @@ public class DamageEnemy: MonoBehaviour
 	#region Fields & Properties
 
 	[SerializeField] GameObject _hitEffect;
-	[SerializeField] int _damageToDeal;
+	public int _damageToDeal;
 
 	#endregion
 
