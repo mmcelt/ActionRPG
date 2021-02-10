@@ -30,6 +30,7 @@ public class SaveManager: MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+			LoadData();
 		}
 		else if (Instance != this)
 			Destroy(gameObject);
@@ -39,18 +40,36 @@ public class SaveManager: MonoBehaviour
 	{
 		_dataPath = Application.persistentDataPath;
 	}
+
+	void OnApplicationQuit()
+	{
+		SaveData();
+	}
 	#endregion
 
 	#region Public Methods
 
 	public void LoadData()
 	{
+		if(File.Exists(_dataPath + "/save.data"))
+		{
+			var serializer = new XmlSerializer(typeof(SaveData));
+			var stream = new FileStream(_dataPath + "/save.data", FileMode.Open);
+			_activeSave = serializer.Deserialize(stream) as SaveData;
+			stream.Close();
 
+			Debug.Log("Data Loaded");
+		}
 	}
 
 	public void SaveData()
 	{
-		
+		var serializer = new XmlSerializer(typeof(SaveData));
+		var stream = new FileStream(_dataPath + "/save.data", FileMode.Create);
+		serializer.Serialize(stream, _activeSave);
+		stream.Close();
+
+		Debug.Log("Data Saved");
 	}
 	#endregion
 

@@ -27,6 +27,8 @@ public class LevelStartActions : MonoBehaviour
 
 		SaveManager.Instance._activeSave._currentScene = SceneManager.GetActiveScene().name;
 		SaveManager.Instance._activeSave._sceneStartPosition = PlayerController.Instance.transform.position;
+
+		SaveManager.Instance.SaveData();	//save data to disk...
 	}
 	#endregion
 
