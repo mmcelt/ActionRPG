@@ -36,6 +36,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	void Start() 
 	{
+		_maxHealth = SaveManager.Instance._activeSave._maxHealth;
 		_currentHealth = _maxHealth;
 		//_currentHealth = 20;	//TESTING
 		UIManager.Instance.UpdateHealth();

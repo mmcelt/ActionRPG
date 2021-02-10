@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class LevelStartActions : MonoBehaviour
 {	
@@ -21,18 +22,12 @@ public class LevelStartActions : MonoBehaviour
 	void Start() 
 	{
 		PlayerController.Instance.DoAtLevelStart();
-		//if (UIManager.Instance._loadingScreen.GetComponent<Image>().color.a > 0f)
-		//{
-		//	UIManager.Instance._loadingScreen.SetActive(false);
-		//}
 
 		Invoke(nameof(TurnOffLoadingScreen), 0.1f);
+
+		SaveManager.Instance._activeSave._currentScene = SceneManager.GetActiveScene().name;
+		SaveManager.Instance._activeSave._sceneStartPosition = PlayerController.Instance.transform.position;
 	}
-	#endregion
-
-	#region Public Methods
-
-
 	#endregion
 
 	#region Private Methods

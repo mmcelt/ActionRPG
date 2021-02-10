@@ -88,7 +88,7 @@ public class UIManager: MonoBehaviour
 		_healthText.text = $"HEALTH: {PlayerHealthController.Instance._currentHealth}/{PlayerHealthController.Instance._maxHealth}";
 	}
 
-	public void UpdateStamina(int stamina)
+	public void UpdateStamina(float stamina)
 	{
 		//stamina
 		_staminaSlider.maxValue = PlayerController.Instance._totalStamina;

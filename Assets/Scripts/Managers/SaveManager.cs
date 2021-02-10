@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class SaveManager: MonoBehaviour
 {
 	#region Fields & Properties
 
-	public static AudioManager Instance;
+	public static SaveManager Instance;
 
-	[SerializeField] AudioSource[] _soundFX;
+	public SaveData _activeSave;
 
 	#endregion
 
@@ -29,26 +29,25 @@ public class AudioManager : MonoBehaviour
 		else if (Instance != this)
 			Destroy(gameObject);
 	}
-
-	void Start() 
-	{
-		//PlayerPrefs.SetInt("Screenmanager Is Fullscreen mode", 0);
-		//PlayerPrefs.SetInt("Screenmanager Resolution Height", 1080);
-		//PlayerPrefs.SetInt("Screenmanager Resolution Width", 1920);
-	}
 	#endregion
 
 	#region Public Methods
 
-	public void PlaySFX(int index)
-	{
-		_soundFX[index].Stop();
-		_soundFX[index].Play();
-	}
+
 	#endregion
 
 	#region Private Methods
 
 
 	#endregion
+}
+
+[System.Serializable]
+public class SaveData
+{
+	public bool _hasBegun;
+	public Vector3 _sceneStartPosition;
+	public string _currentScene;
+	public int _maxHealth, _currentSword, _swordDamage, _currentCoins;
+	public float _maxStamina;
 }

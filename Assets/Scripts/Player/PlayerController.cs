@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			//DontDestroyOnLoad(gameObject);
+			DontDestroyOnLoad(gameObject);
 		}
 		else if (Instance != this)
 			Destroy(gameObject);
@@ -77,6 +77,12 @@ public class PlayerController : MonoBehaviour
 
 	void Start() 
 	{
+		transform.position = SaveManager.Instance._activeSave._sceneStartPosition;
+		_currentSword = SaveManager.Instance._activeSave._currentSword;
+		_swordSR.sprite = _allSwords[_currentSword];
+		_swordDamage._damageToDeal = SaveManager.Instance._activeSave._swordDamage;
+		_totalStamina = SaveManager.Instance._activeSave._maxStamina;
+
 		_theRB = GetComponent<Rigidbody2D>();
 		_theAnim = GetComponent<Animator>();
 		_activeMoveSpeed = _moveSpeed;
@@ -150,6 +156,8 @@ public class PlayerController : MonoBehaviour
 		_swordDamage._damageToDeal = newDamage;
 		_currentSword = newSwordRef;
 		_swordSR.sprite = _allSwords[_currentSword];
+		SaveManager.Instance._activeSave._swordDamage = newDamage;
+		SaveManager.Instance._activeSave._currentSword = newSwordRef;
 	}
 
 	public void ResetOnRespawn()
@@ -160,6 +168,9 @@ public class PlayerController : MonoBehaviour
 		_currentStamina = _totalStamina;
 		_knockBackCounter = 0f;
 		PlayerHealthController.Instance._currentHealth = PlayerHealthController.Instance._maxHealth;
+
+		UIManager.Instance.UpdateHealth();
+		UIManager.Instance.UpdateStamina(_totalStamina);
 	}
 	#endregion
 
