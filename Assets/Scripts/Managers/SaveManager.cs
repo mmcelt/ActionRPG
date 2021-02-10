@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 public class SaveManager: MonoBehaviour
 {
@@ -9,6 +12,8 @@ public class SaveManager: MonoBehaviour
 	public static SaveManager Instance;
 
 	public SaveData _activeSave;
+
+	string _dataPath;
 
 	#endregion
 
@@ -29,11 +34,24 @@ public class SaveManager: MonoBehaviour
 		else if (Instance != this)
 			Destroy(gameObject);
 	}
+
+	void Start()
+	{
+		_dataPath = Application.persistentDataPath;
+	}
 	#endregion
 
 	#region Public Methods
 
+	public void LoadData()
+	{
 
+	}
+
+	public void SaveData()
+	{
+		
+	}
 	#endregion
 
 	#region Private Methods
