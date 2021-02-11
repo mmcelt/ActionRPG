@@ -44,15 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activeSave:
-    _hasBegun: 0
-    _sceneStartPosition: {x: 0, y: 0, z: 0}
-    _currentScene: 
-    _currentHealth: 50
-    _maxHealth: 50
-    _currentSword: 0
-    _swordDamage: 5
-    _currentCoins: 50
-    _maxStamina: 30
+    HasBegun: 0
+    SceneStartPosition: {x: 0, y: 0, z: 0}
+    CurrentScene: 
+    CurrentHealth: 50
+    MaxHealth: 50
+    CurrentSword: 0
+    SwordDamage: 10
+    CurrentCoins: 25
+    MaxStamina: 30
     Progress:
     - Name: Test
       IsMarked: 0

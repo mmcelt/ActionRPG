@@ -36,7 +36,7 @@ public class ShopItem : MonoBehaviour
 				if (GameManager.Instance._currentCoins >= _itemCost)
 				{
 					GameManager.Instance._currentCoins -= _itemCost;
-					SaveManager.Instance._activeSave._currentCoins = GameManager.Instance._currentCoins;
+					SaveManager.Instance._activeSave.CurrentCoins = GameManager.Instance._currentCoins;
 
 					UIManager.Instance.UpdateCoins();
 
@@ -44,14 +44,14 @@ public class ShopItem : MonoBehaviour
 					{
 						PlayerHealthController.Instance._maxHealth += _amountToAdd;
 						PlayerHealthController.Instance._currentHealth = PlayerHealthController.Instance._maxHealth;
-						SaveManager.Instance._activeSave._maxHealth = PlayerHealthController.Instance._maxHealth;
-						SaveManager.Instance._activeSave._currentHealth = PlayerHealthController.Instance._currentHealth;
+						SaveManager.Instance._activeSave.MaxHealth = PlayerHealthController.Instance._maxHealth;
+						SaveManager.Instance._activeSave.CurrentHealth = PlayerHealthController.Instance._currentHealth;
 						UIManager.Instance.UpdateHealth();
 					}
 					if (_isStaminaUpgrade)
 					{
 						PlayerController.Instance._totalStamina += _amountToAdd;
-						SaveManager.Instance._activeSave._maxStamina = PlayerController.Instance._totalStamina;
+						SaveManager.Instance._activeSave.MaxStamina = PlayerController.Instance._totalStamina;
 						UIManager.Instance.UpdateStamina(PlayerController.Instance._totalStamina);
 					}
 					if (_removeAfterPurchase)

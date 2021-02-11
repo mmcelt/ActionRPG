@@ -76,11 +76,11 @@ public class PlayerController : MonoBehaviour
 
 	void Start() 
 	{
-		transform.position = SaveManager.Instance._activeSave._sceneStartPosition;
-		_currentSword = SaveManager.Instance._activeSave._currentSword;
+		transform.position = SaveManager.Instance._activeSave.SceneStartPosition;
+		_currentSword = SaveManager.Instance._activeSave.CurrentSword;
 		_swordSR.sprite = _allSwords[_currentSword];
-		_swordDamage._damageToDeal = SaveManager.Instance._activeSave._swordDamage;
-		_totalStamina = SaveManager.Instance._activeSave._maxStamina;
+		_swordDamage._damageToDeal = SaveManager.Instance._activeSave.SwordDamage;
+		_totalStamina = SaveManager.Instance._activeSave.MaxStamina;
 
 		_theRB = GetComponent<Rigidbody2D>();
 		_theAnim = GetComponent<Animator>();
@@ -156,8 +156,8 @@ public class PlayerController : MonoBehaviour
 		_swordDamage._damageToDeal = newDamage;
 		_currentSword = newSwordRef;
 		_swordSR.sprite = _allSwords[_currentSword];
-		SaveManager.Instance._activeSave._swordDamage = newDamage;
-		SaveManager.Instance._activeSave._currentSword = newSwordRef;
+		SaveManager.Instance._activeSave.SwordDamage = newDamage;
+		SaveManager.Instance._activeSave.CurrentSword = newSwordRef;
 	}
 
 	public void ResetOnRespawn()

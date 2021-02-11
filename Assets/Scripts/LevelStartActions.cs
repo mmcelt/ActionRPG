@@ -25,8 +25,8 @@ public class LevelStartActions : MonoBehaviour
 
 		Invoke(nameof(TurnOffLoadingScreen), 0.1f);
 
-		SaveManager.Instance._activeSave._currentScene = SceneManager.GetActiveScene().name;
-		SaveManager.Instance._activeSave._sceneStartPosition = PlayerController.Instance.transform.position;
+		SaveManager.Instance._activeSave.CurrentScene = SceneManager.GetActiveScene().name;
+		SaveManager.Instance._activeSave.SceneStartPosition = PlayerController.Instance.transform.position;
 
 		SaveManager.Instance.SaveData();	//save data to disk...
 	}

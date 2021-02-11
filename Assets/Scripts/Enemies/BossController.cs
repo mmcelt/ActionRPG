@@ -39,17 +39,26 @@ public class BossController : MonoBehaviour
 
 	void Start()
 	{
-		_bossHealth = _bossMaxHealth;
-		_door.SetActive(true);
-		_spawnCounter = _initalSpawnDelay;
-		UIManager.Instance._bossHealthbar.SetActive(true);
-		UIManager.Instance.UpdateBossHealthbar(_bossMaxHealth, _bossHealth, _bossName);
-		_levelBGM.Stop();
-		_bossBattleBGMS.Play();
+		if (SaveManager.Instance.CheckProgress(_progressToMark))
+		{
+			gameObject.SetActive(false);
+		}
+		else
+		{
+			_bossHealth = _bossMaxHealth;
+			_door.SetActive(true);
+			_spawnCounter = _initalSpawnDelay;
+			UIManager.Instance._bossHealthbar.SetActive(true);
+			UIManager.Instance.UpdateBossHealthbar(_bossMaxHealth, _bossHealth, _bossName);
+			_levelBGM.Stop();
+			_bossBattleBGMS.Play();
+		}
 	}
 
 	void Update()
 	{
+		if (SaveManager.Instance.CheckProgress(_progressToMark)) return;
+
 		if (_bossHealth <= 0) return;
 
 		if (_spawnCounter > 0)

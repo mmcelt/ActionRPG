@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
 	void Start() 
 	{
-		_currentCoins = SaveManager.Instance._activeSave._currentCoins;
+		_currentCoins = SaveManager.Instance._activeSave.CurrentCoins;
 
 		UIManager.Instance.UpdateCoins();
 	}
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 	public void GetCoins(int coinsToAdd)
 	{
 		_currentCoins += coinsToAdd;
-		SaveManager.Instance._activeSave._currentCoins = _currentCoins;
+		SaveManager.Instance._activeSave.CurrentCoins = _currentCoins;
 		UIManager.Instance.UpdateCoins();
 	}
 

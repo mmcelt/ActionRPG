@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
 			PlayerController.Instance = null;
 		}
 
-		if (SaveManager.Instance._activeSave._hasBegun)
+		if (SaveManager.Instance._activeSave.HasBegun)
 			_continueButton.SetActive(true);
 	}
 	#endregion
@@ -43,7 +43,7 @@ public class MainMenu : MonoBehaviour
 	{
 		SceneManager.LoadScene(_startingScene);
 		SaveManager.Instance.ResetSave();
-		SaveManager.Instance._activeSave._hasBegun = true;
+		SaveManager.Instance._activeSave.HasBegun = true;
 	}
 
 	public void QuitGame()
@@ -56,7 +56,7 @@ public class MainMenu : MonoBehaviour
 
 	public void ContinueGame()
 	{
-		SceneManager.LoadScene(SaveManager.Instance._activeSave._currentScene);
+		SceneManager.LoadScene(SaveManager.Instance._activeSave.CurrentScene);
 	}
 	#endregion
 

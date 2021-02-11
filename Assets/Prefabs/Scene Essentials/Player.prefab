@@ -296,6 +296,7 @@ MonoBehaviour:
   _dashStaminaCost: 15
   _totalStamina: 50
   _staminaRefillSpeed: 5
+  _currentStamina: 0
   _spinCost: 20
   _spinCooldown: 1
   _swordSR: {fileID: 4175799962672063983}
@@ -317,8 +318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathEffect: {fileID: 1597439630448732773, guid: c6430f7c07edd44478d4b8d42dd9e9ea, type: 3}
-  _currentHealth: 0
-  _maxHealth: 50
+  _currentHealth: 50
+  _maxHealth: 5
   _invincibilityLength: 1
 --- !u!1 &4175799964341833942
 GameObject:

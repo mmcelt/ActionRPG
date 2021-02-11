@@ -84,8 +84,8 @@ public class SaveManager: MonoBehaviour
 
 	public void UpdateAllData()
 	{
-		_activeSave._sceneStartPosition = PlayerController.Instance.transform.position;
-		_activeSave._currentHealth = PlayerHealthController.Instance._currentHealth;
+		_activeSave.SceneStartPosition = PlayerController.Instance.transform.position;
+		_activeSave.CurrentHealth = PlayerHealthController.Instance._currentHealth;
 	}
 
 	public void MarkProgress(string progressToMark)
@@ -104,6 +104,19 @@ public class SaveManager: MonoBehaviour
 		if (!found)
 			Debug.LogError($"Progress entry not found for: {progressToMark}!");
 	}
+
+	public bool CheckProgress(string progressToCheck)
+	{
+		foreach (var progress in _activeSave.Progress)
+		{
+			if (progress.Name == progressToCheck)
+			{
+				if (progress.IsMarked)
+					return true;
+			}
+		}
+		return false;
+	}
 	#endregion
 
 	#region Private Methods
@@ -115,11 +128,11 @@ public class SaveManager: MonoBehaviour
 [System.Serializable]
 public class SaveData
 {
-	public bool _hasBegun;
-	public Vector3 _sceneStartPosition;
-	public string _currentScene;
-	public int _currentHealth, _maxHealth, _currentSword, _swordDamage, _currentCoins;
-	public float _maxStamina;
+	public bool HasBegun;
+	public Vector3 SceneStartPosition;
+	public string CurrentScene;
+	public int CurrentHealth, MaxHealth, CurrentSword, SwordDamage, CurrentCoins;
+	public float MaxStamina;
 	public List<ProgressItem> Progress = new List<ProgressItem>();
 }
 
