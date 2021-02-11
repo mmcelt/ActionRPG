@@ -45,6 +45,7 @@ public class ShopItem : MonoBehaviour
 						PlayerHealthController.Instance._maxHealth += _amountToAdd;
 						PlayerHealthController.Instance._currentHealth = PlayerHealthController.Instance._maxHealth;
 						SaveManager.Instance._activeSave._maxHealth = PlayerHealthController.Instance._maxHealth;
+						SaveManager.Instance._activeSave._currentHealth = PlayerHealthController.Instance._currentHealth;
 						UIManager.Instance.UpdateHealth();
 					}
 					if (_isStaminaUpgrade)

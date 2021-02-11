@@ -37,7 +37,8 @@ public class PlayerHealthController : MonoBehaviour
 	void Start() 
 	{
 		_maxHealth = SaveManager.Instance._activeSave._maxHealth;
-		_currentHealth = _maxHealth;
+		_currentHealth = SaveManager.Instance._activeSave._currentHealth;
+		//_currentHealth = _maxHealth;
 		//_currentHealth = 20;	//TESTING
 		UIManager.Instance.UpdateHealth();
 	}
@@ -59,6 +60,7 @@ public class PlayerHealthController : MonoBehaviour
 
 		//clamp _currentHealth to 0 or more
 		_currentHealth = Mathf.Max(_currentHealth - damageAmount, 0);
+		SaveManager.Instance._activeSave._currentHealth = _currentHealth;
 		_invincibilityCounter = _invincibilityLength;
 		AudioManager.Instance.PlaySFX(7);
 
@@ -76,6 +78,7 @@ public class PlayerHealthController : MonoBehaviour
 	public void RestoreHealth(int healthToRestore)
 	{
 		_currentHealth = Mathf.Min(_currentHealth + healthToRestore, _maxHealth);
+		SaveManager.Instance._activeSave._currentHealth = _currentHealth;
 		UIManager.Instance.UpdateHealth();
 	}
 	#endregion

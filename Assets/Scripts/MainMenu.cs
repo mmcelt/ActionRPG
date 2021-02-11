@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 	#region Fields & Properties
 
 	[SerializeField] string _startingScene;
+	[SerializeField] GameObject _continueButton;
 
 	#endregion
 
@@ -20,7 +21,19 @@ public class MainMenu : MonoBehaviour
 
 	void Start() 
 	{
-		
+		if (GameManager.Instance != null)
+		{
+			Destroy(GameManager.Instance.gameObject);
+			GameManager.Instance = null;
+		}
+		if (PlayerController.Instance != null)
+		{
+			Destroy(PlayerController.Instance.gameObject);
+			PlayerController.Instance = null;
+		}
+
+		if (SaveManager.Instance._activeSave._hasBegun)
+			_continueButton.SetActive(true);
 	}
 	#endregion
 
@@ -29,6 +42,8 @@ public class MainMenu : MonoBehaviour
 	public void StartGame()
 	{
 		SceneManager.LoadScene(_startingScene);
+		SaveManager.Instance.ResetSave();
+		SaveManager.Instance._activeSave._hasBegun = true;
 	}
 
 	public void QuitGame()
@@ -37,6 +52,11 @@ public class MainMenu : MonoBehaviour
 		UnityEditor.EditorApplication.isPlaying = false;
 #endif
 		Application.Quit();
+	}
+
+	public void ContinueGame()
+	{
+		SceneManager.LoadScene(SaveManager.Instance._activeSave._currentScene);
 	}
 	#endregion
 

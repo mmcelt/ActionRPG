@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using UnityEngine.SceneManagement;
 
 public class SaveManager: MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class SaveManager: MonoBehaviour
 
 	public SaveData _activeSave;
 
-	string _dataPath;
+	SaveData _defaultData;
 
 	#endregion
 
@@ -30,6 +31,7 @@ public class SaveManager: MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+			_defaultData = _activeSave;
 			LoadData();
 		}
 		else if (Instance != this)
@@ -38,11 +40,12 @@ public class SaveManager: MonoBehaviour
 
 	void Start()
 	{
-		_dataPath = Application.persistentDataPath;
+		//_dataPath = Application.persistentDataPath;
 	}
 
 	void OnApplicationQuit()
 	{
+		UpdateAllData();
 		SaveData();
 	}
 	#endregion
@@ -51,7 +54,8 @@ public class SaveManager: MonoBehaviour
 
 	public void LoadData()
 	{
-		if(File.Exists(_dataPath + "/save.data"))
+		string _dataPath = Application.persistentDataPath;
+		if (File.Exists(_dataPath + "/save.data"))
 		{
 			var serializer = new XmlSerializer(typeof(SaveData));
 			var stream = new FileStream(_dataPath + "/save.data", FileMode.Open);
@@ -64,12 +68,24 @@ public class SaveManager: MonoBehaviour
 
 	public void SaveData()
 	{
+		string _dataPath = Application.persistentDataPath;
 		var serializer = new XmlSerializer(typeof(SaveData));
 		var stream = new FileStream(_dataPath + "/save.data", FileMode.Create);
 		serializer.Serialize(stream, _activeSave);
 		stream.Close();
 
 		Debug.Log("Data Saved");
+	}
+
+	public void ResetSave()
+	{
+		_activeSave = _defaultData;
+	}
+
+	public void UpdateAllData()
+	{
+		_activeSave._sceneStartPosition = PlayerController.Instance.transform.position;
+		_activeSave._currentHealth = PlayerHealthController.Instance._currentHealth;
 	}
 	#endregion
 
@@ -85,6 +101,6 @@ public class SaveData
 	public bool _hasBegun;
 	public Vector3 _sceneStartPosition;
 	public string _currentScene;
-	public int _maxHealth, _currentSword, _swordDamage, _currentCoins;
+	public int _currentHealth, _maxHealth, _currentSword, _swordDamage, _currentCoins;
 	public float _maxStamina;
 }

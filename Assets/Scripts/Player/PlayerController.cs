@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 	public float _totalStamina;
 	[SerializeField] float _staminaRefillSpeed;
 
-	float _currentStamina;
+	[HideInInspector] public float _currentStamina;
 
 	[Header("Spin Attack")]
 	[SerializeField] float _spinCost;
@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
 	#endregion
 
 	#region Getters
-
 
 	#endregion
 
@@ -143,6 +142,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_canMove = true;
 		_respawnPos = transform.position;
+		UIManager.Instance.UpdateHealth();
 	}
 
 	public void RestoreStamina(int staminaToRestore)

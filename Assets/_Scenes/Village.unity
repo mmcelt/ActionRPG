@@ -10532,7 +10532,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allEnemies: []
-  _clonedEnemies: []
 --- !u!1 &764270118
 GameObject:
   m_ObjectHideFlags: 0
@@ -32838,7 +32837,6 @@ MonoBehaviour:
   _allEnemies:
   - {fileID: 1932524340}
   - {fileID: 647456243}
-  _clonedEnemies: []
 --- !u!1 &1056171446
 GameObject:
   m_ObjectHideFlags: 0
@@ -34991,7 +34989,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allEnemies: []
-  _clonedEnemies: []
 --- !u!61 &2128976489
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -35330,6 +35327,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7396368378776693763, guid: 11b438d4a536a884aaf0c2470b835985, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8834426971402371840, guid: 11b438d4a536a884aaf0c2470b835985, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
