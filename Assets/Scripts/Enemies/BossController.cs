@@ -14,6 +14,7 @@ public class BossController : MonoBehaviour
 	[SerializeField] float _moveSpeed, _timeActive, _timeBetweenSpawns, _initalSpawnDelay;
 	[SerializeField] AudioSource _levelBGM, _bossBattleBGMS;
 	[SerializeField] GameObject _victoryObject;
+	[SerializeField] string _progressToMark;
 
 	Vector3 _moveTarget;
 	float _activeCounter, _spawnCounter;
@@ -139,6 +140,8 @@ public class BossController : MonoBehaviour
 			_levelBGM.Play();
 
 			_victoryObject.SetActive(true);
+
+			SaveManager.Instance.MarkProgress(_progressToMark);
 		}
 	}
 	#endregion

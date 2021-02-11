@@ -87,6 +87,23 @@ public class SaveManager: MonoBehaviour
 		_activeSave._sceneStartPosition = PlayerController.Instance.transform.position;
 		_activeSave._currentHealth = PlayerHealthController.Instance._currentHealth;
 	}
+
+	public void MarkProgress(string progressToMark)
+	{
+		bool found = false;
+
+		foreach(var progress in _activeSave.Progress)
+		{
+			if (progress.Name == progressToMark)
+			{
+				progress.IsMarked = true;
+				found = true;
+				break;
+			}
+		}
+		if (!found)
+			Debug.LogError($"Progress entry not found for: {progressToMark}!");
+	}
 	#endregion
 
 	#region Private Methods
@@ -103,4 +120,12 @@ public class SaveData
 	public string _currentScene;
 	public int _currentHealth, _maxHealth, _currentSword, _swordDamage, _currentCoins;
 	public float _maxStamina;
+	public List<ProgressItem> Progress = new List<ProgressItem>();
+}
+
+[System.Serializable]
+public class ProgressItem
+{
+	public string Name;
+	public bool IsMarked;
 }

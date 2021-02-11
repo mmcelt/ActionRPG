@@ -53,3 +53,8 @@ MonoBehaviour:
     _swordDamage: 5
     _currentCoins: 50
     _maxStamina: 30
+    Progress:
+    - Name: Test
+      IsMarked: 0
+    - Name: Dungeon 1 Completed
+      IsMarked: 0
