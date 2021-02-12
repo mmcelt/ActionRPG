@@ -35274,7 +35274,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8708172410547642825, guid: 42f265fa8086eaf4595fe22ca153ef04, type: 3}
       propertyPath: _sceneToLoad
-      value: MainMenu
+      value: Victory Screen
       objectReference: {fileID: 0}
     - target: {fileID: 8708172410547642825, guid: 42f265fa8086eaf4595fe22ca153ef04, type: 3}
       propertyPath: _exitLocation.y
